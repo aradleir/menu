@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .header {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      flex: 1;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .input-field {
+      flex: 2;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .button {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .qr-image {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">Generate QR Code</div>
+    <div class="form-group">
+      <div class="label">Enter Table Number:</div>
+      <input type="number" class="input-field" id="tableNumber">
+    </div>
+    <button class="button" onclick="generateQRCode()">Generate QR</button>
+    <div class="qr-image" id="qrImageContainer"></div>
+
+    <div class="form-group">
+      <div class="label">Enter Table Number to Delete:</div>
+      <input type="number" class="input-field" id="deleteTableNumber">
+    </div>
+    <button class="button" onclick="deleteTable()">Delete Table</button>
+
+    <div class="header">Generate Check</div>
+    <div class="form-group">
+      <div class="label">Enter Table Number:</div>
+      <input type="number" class="input-field" id="tableNumber11">
+    </div>
+    <button class="button" onclick="generateCheck()" type="button">Generate Check</button>
+  </div>
+
+
+  
+  <script>
+  function extractNumbersFromString(inputString) {
+  const regex = /\d+/g;
+  const matches = inputString.match(regex);
+  return matches ? matches.map(Number) : [];
+}
+
+async function checkTableNumber(tableNumber) {
+  const response = await fetch('/api/get-table-numbers');
+  const data = await response.json();
+  const tableNumbers = data.tableNumbers;
+  let array = [];
+
+  tableNumbers.forEach(i => {
+    array.push(...extractNumbersFromString(i)); // Using spread operator to concatenate the extracted numbers
+  });
+
+  console.log(array);
+
+  if (array.includes(Number(tableNumber))) return true;
+  else return false;
+}
+
+async function checkEnteredUser(){
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get("code")
+      const username = urlParams.get("username")
+      const role = urlParams.get("role")
+    
+      if(!role || !code || !username){
+        window.location.href = "/menu/edit.html"
+      }
+    }
+    document.addEventListener("DOMContentLoaded", checkEnteredUser())
+    async function generateQRCode() {
+      
+      const tableNumberInput = document.getElementById('tableNumber');
+      const tableNumber = tableNumberInput.value;
+      const tableNumberExists = await checkTableNumber(tableNumber)
+      if(tableNumberExists){
+        alert('Table number is already added');
+        return;
+      }
+
+      // Call the server-side API to generate the QR code
+      fetch('/api/generate-qr', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tableNumber }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const qrDataURL = data.qrDataURL;
+
+          // Create an image element for the QR code
+          const qrImage = new Image();
+          qrImage.src = qrDataURL;
+
+          // Wait for the image to load completely
+          qrImage.onload = () => {
+            // Open a new window
+            const newWindow = window.open('', '_blank');
+
+            // Generate the content for the new window
+            const content = `
+              <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+              <style>
+                body {
+                  font-family: 'Poppins', sans-serif;
+                }
+
+                #style {
+                  background-color: lightgrey;
+                  border-radius: 10px;
+                  padding: 10px;
+                  margin-left: 28rem;
+                  width: 400px;
+                  margin-top: 10rem;
+                }
+
+                #style img {
+                  margin-left: 7rem;
+                }
+
+                #style h1 {
+                  margin-left: 2.5rem;
+                }
+              </style>
+              <div id="style">
+                <br>
+                <img src="${qrDataURL}">
+                <h1>Scan the QR Code</h1>
+              </div>
+            `;
+
+            // Write the content to the new window and close it after printing
+            newWindow.document.write(content);
+            newWindow.window.print();
+            newWindow.document.close();
+          };
+        })
+        .catch((error) => {
+          console.error('Error generating QR code:', error);
+          alert('An error occurred while generating QR code.');
+        });
+    }
+
+    async function deleteTable() {
+    const deleteTableNumberInput = document.getElementById('deleteTableNumber');
+    const deleteTableNumber = deleteTableNumberInput.value;
+
+    // Call the server-side API to delete the table data
+    fetch(`/api/delete-table/${deleteTableNumber}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+      })
+      .catch((error) => {
+        console.error('Error deleting table data:', error);
+        alert('An error occurred while deleting the table data.');
+      });
+  }
+  </script>
+
+
+<script>
+  function generateCheckContent(orders) {
+    let totalPrice = 0;
+  
+    // Create a table to display the orders
+    let tableContent = `
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid #000; padding: 8px;">Item</th>
+            <th style="border: 1px solid #000; padding: 8px;">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+  
+    // Add each order to the table
+    orders.forEach((order) => {
+      tableContent += `
+        <tr>
+          <td style="border: 1px solid #000; padding: 8px;">${order.name}</td>
+          <td style="border: 1px solid #000; padding: 8px;">$${order.price.toFixed(2)}</td>
+        </tr>
+      `;
+  
+      totalPrice += order.price;
+    });
+  
+    // Add the total price row
+    tableContent += `
+      <tr>
+        <td style="border: 1px solid #000; padding: 8px; font-weight: bold;">Total</td>
+        <td style="border: 1px solid #000; padding: 8px; font-weight: bold;">$${totalPrice.toFixed(2)}</td>
+      </tr>
+    `;
+  
+    // Close the table
+    tableContent += `
+        </tbody>
+      </table>
+    `;
+  
+    // Create the check content with the table and additional information
+    const checkContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Check for Table ${orders[0].tableNumber}</title>
+        </head>
+        <body>
+          <h1>Check for Table ${orders[0].tableNumber}</h1>
+          ${tableContent}
+          <p>Date: ${new Date().toLocaleString()}</p>
+        </body>
+      </html>
+    `;
+  
+    return checkContent;
+  }
+  
+  
+  async function generateCheck() {
+      const tableNumber = document.getElementById('tableNumber11').value
+      
+  alert(tableNumber)
+      console.log('Table number entered:', tableNumber);
+  
+      // Call the server-side API to get the orders for the table number
+      fetch(`/api/get-orders/${tableNumber}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Data received from the server:', data); // New log statement
+          const orders = data.orders;
+          console.log('Orders for the table:', orders); // New log statement
+  
+          if (orders.length === 0) {
+            alert('No orders found for the specified table number.');
+            return;
+          }
+  
+        // Generate the check based on the orders data
+        const checkContent = generateCheckContent(orders);
+        // Print the check content
+        const newWindow = window.open('', '_blank');
+        newWindow.document.write(checkContent);
+        newWindow.print()
+       
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('An error occurred while generating the check.');
+      });
+  }
+    </script>
+</body>
+
+</html>

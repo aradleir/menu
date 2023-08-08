@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Menu</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap">
+  <!-- Inline CSS style -->
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .app-icons-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .app-icon {
+      text-align: center;
+      margin-bottom: 20px;
+      background-color: lightgrey;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .app-icon:hover{
+        transform: scale(1.1);
+        transition: .5s;
+    }
+
+    .app-icon ion-icon {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .app-icon-text {
+      font-size: 14px;
+    }
+
+  </style>
+  <!-- End of Inline CSS style -->
+</head>
+<body>
+  <div id="dashboardContent">
+  <header>
+    <h1>Navigation</h1>
+  </header>
+  <main>
+    <div class="app-icons-container">
+        <div class="app-icon" onclick="editmenu()">
+            <ion-icon name="create-outline"></ion-icon>
+            <div class="app-icon-text" >Edit Menu</div>
+          </div>
+          <div class="app-icon" onclick="window.open('./menu/menu.html', '_blank')">
+            <ion-icon name="list-outline"></ion-icon>
+            <div class="app-icon-text" > Menu</div>
+          </div>
+          <div class="app-icon" onclick="editusers()">
+            <ion-icon name="person-add-outline" ></ion-icon>
+            <div class="app-icon-text">Edit Users</div>
+          </div>
+          <div class="app-icon" onclick="users()">
+            <ion-icon name="person-outline" ></ion-icon>
+            <div class="app-icon-text">Users</div>
+          </div>
+          <div class="app-icon" onclick="qr()">
+            <ion-icon name="qr-code-outline"></ion-icon>
+            <div class="app-icon-text">QR Generation</div>
+          </div>
+          <div class="app-icon" onclick="control()">
+            <ion-icon name="cog-outline"></ion-icon>
+            <div class="app-icon-text">Control Panel</div>
+          </div>
+          <div class="app-icon" onclick="shifts()">
+            <ion-icon name="git-compare-outline"></ion-icon>
+            <div class="app-icon-text">Shift management</div>
+          </div>
+          <div class="app-icon" onclick="orders()">
+            <ion-icon name="analytics-outline" ></ion-icon>
+            <div class="app-icon-text">All orders</div>
+          </div>
+          <div class="app-icon" onclick="logout()">
+            <ion-icon name="log-out-outline"></ion-icon>
+            <div class="app-icon-text">Log out</div>
+          </div>
+          
+  </div>
+  </main>
+</div>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+  function shifts(){
+    const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+      window.open(`shift/shift-management.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
+  }
+  function qr(){
+    const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+      window.open(`cashier/qr.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
+  }
+  function control(){
+    const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+      window.open(`cashier/control-panel.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
+  }
+   function editusers(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+      window.open(`users/edit-users.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
+    }
+
+    function editmenu(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+      window.open(`menu/edit-menu.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
+    }
+    function orders(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+      window.open(`finance/orders.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
+    }
+    function users(){
+      const urlParams = new URLSearchParams(window.location.search)
+      const code = urlParams.get("code")
+      const username = urlParams.get("username")
+      const role = urlParams.get("role")
+      window.open(`users/view-users.html?code=${code}&role=${role}&username=${username}`, `_blank`)
+    }
+    function orders(){
+      const urlParams = new URLSearchParams(window.location.search)
+      const code = urlParams.get("code")
+      const username = urlParams.get("username")
+      const role = urlParams.get("role")
+      window.open(`finance/orders.html?code=${code}&role=${role}&username=${username}`, `_blank`)
+    }
+    async function checkCode() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+
+      if (!code) {
+        // If the code is missing, redirect back to the login page
+        window.open('menu/menu.html', "_blank")
+      } else {
+        try {
+          const response = await fetch(`/api/codes/${code}`);
+       
+          if (response.ok) {
+            // Code is valid, show the dashboard
+            document.getElementById('dashboardContent').style.display = 'block';
+
+            // Get the logged-in username and role from the URL query parameters
+            const loggedInUsernameElement = document.getElementById('loggedInUsername');
+            const loggedInUserRoleElement = document.getElementById('loggedInUserRole');
+            if (loggedInUsernameElement && loggedInUserRoleElement) {
+              loggedInUsernameElement.textContent = username || 'User';
+              loggedInUserRoleElement.textContent = role || 'Role';
+            }
+          } else {
+            // Code is invalid, redirect back to the login page
+            window.open('menu/menu.html', "_blank")
+          }
+        } catch (error) {
+          console.error(error);
+          alert('An error occurred while checking the code.');
+          // Redirect back to the login page
+          window.open('menu/menu.html', "_blank")
+        }
+      }
+    }
+    // Call the checkCode function when the page loads
+    document.addEventListener('DOMContentLoaded', checkCode);
+  
+    function logout() {
+      // Redirect back to the login page
+      window.location.href = '/login.html';
+    }
+</script>
+</body>
+</html>
+
