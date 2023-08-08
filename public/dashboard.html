@@ -24,7 +24,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      min-height: 50vh;
     }
 
     .app-icons-container {
@@ -57,6 +57,12 @@
       font-size: 14px;
     }
 
+    #ee{
+      font-size: 50px;
+      text-align: center;
+
+    }
+
   </style>
   <!-- End of Inline CSS style -->
 </head>
@@ -65,42 +71,43 @@
   <header>
     <h1>Navigation</h1>
   </header>
+  <h1 id="ee"></h1>
   <main>
     <div class="app-icons-container">
         <div class="app-icon" onclick="editmenu()">
-            <ion-icon name="create-outline"></ion-icon>
+            <ion-icon name="create-sharp"></ion-icon>
             <div class="app-icon-text" >Edit Menu</div>
           </div>
           <div class="app-icon" onclick="window.open('./menu/menu.html', '_blank')">
-            <ion-icon name="list-outline"></ion-icon>
+            <ion-icon name="list-sharp"></ion-icon>
             <div class="app-icon-text" > Menu</div>
           </div>
           <div class="app-icon" onclick="editusers()">
-            <ion-icon name="person-add-outline" ></ion-icon>
+            <ion-icon name="person-add-sharp" ></ion-icon>
             <div class="app-icon-text">Edit Users</div>
           </div>
           <div class="app-icon" onclick="users()">
-            <ion-icon name="person-outline" ></ion-icon>
+            <ion-icon name="person-sharp" ></ion-icon>
             <div class="app-icon-text">Users</div>
           </div>
           <div class="app-icon" onclick="qr()">
-            <ion-icon name="qr-code-outline"></ion-icon>
+            <ion-icon name="qr-code-sharp"></ion-icon>
             <div class="app-icon-text">QR Generation</div>
           </div>
           <div class="app-icon" onclick="control()">
-            <ion-icon name="cog-outline"></ion-icon>
+            <ion-icon name="cog-sharp"></ion-icon>
             <div class="app-icon-text">Control Panel</div>
           </div>
           <div class="app-icon" onclick="shifts()">
-            <ion-icon name="git-compare-outline"></ion-icon>
+            <ion-icon name="time-sharp"></ion-icon>
             <div class="app-icon-text">Shift management</div>
           </div>
           <div class="app-icon" onclick="orders()">
-            <ion-icon name="analytics-outline" ></ion-icon>
+            <ion-icon name="analytics-sharp" ></ion-icon>
             <div class="app-icon-text">All orders</div>
           </div>
           <div class="app-icon" onclick="logout()">
-            <ion-icon name="log-out-outline"></ion-icon>
+            <ion-icon name="log-out-sharp"></ion-icon>
             <div class="app-icon-text">Log out</div>
           </div>
           
@@ -111,6 +118,31 @@
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script>
+
+  function checkEnteredUser(){
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const username = urlParams.get('username');
+        const role = urlParams.get('role');
+        
+        if(!code || !username || !role){
+          return window.location.href = "/menu/menu.html"
+        }else{
+  
+        }
+        
+        
+      }
+      checkEnteredUser()
+      </script>
+<script>
+  function welcome(){
+    const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      const ee = document.getElementById("ee");
+      ee.textContent = `Welcome, ${username}`
+  }
+  welcome()
   function shifts(){
     const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');

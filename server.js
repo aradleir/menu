@@ -474,7 +474,7 @@ app.post('/api/end-shift', (req, res) => {
       }
 
       const db = require("./databases/shiftmanagement")
-      db.run("DELETE FROM orders", (err) => {
+      db.run("DELETE FROM orders1", (err) => {
         
       })
 
