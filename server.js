@@ -566,7 +566,7 @@ app.post('/api/submit-order', (req, res) => {
 
     const shiftDb = require("./databases/shiftmanagement")
     const shiftsql = `
-      INSERT INTO orders (price)
+      INSERT INTO orders1 (price)
       VALUES (?)
     `;
     
@@ -601,7 +601,7 @@ app.get('/get-orders', (req, res) => {
 
 app.get("/get-shift-orders", (req,res) => {
   const shiftDB = require("./databases/shiftmanagement")
-  shiftDB.all('SELECT * FROM orders', (err, rows) => {
+  shiftDB.all('SELECT * FROM orders1', (err, rows) => {
     if (err) {
       console.error('Error inserting order into the database:', err.message);
       return res.status(500).json({ error: 'Error inserting order into the database' });
