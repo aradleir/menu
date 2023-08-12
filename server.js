@@ -769,4 +769,5 @@ app.post('/api/toggle-stock/:itemId/:status', (req, res) => {
 const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  console.log(process.env.not_so_secret_code)
 });
