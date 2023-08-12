@@ -12,7 +12,8 @@
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background-color: #f7f7f7;
+      color: #fff;
+      background-color: #444;
     }
 
     header {
@@ -26,11 +27,17 @@
       max-width: 600px;
       margin: 20px auto;
       padding: 20px;
-      background-color: #fff;
+      background-color: #333;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
+    body button{
+      background-color: #444;
+    }
+    body button:hover{
+      transition: .5s;
+      background-color: #555;
+    }
     h2 {
       margin-top: 0;
       font-weight: 700;
@@ -87,6 +94,11 @@
     <h2>Total money earned by current cashier:</h2>
     <p><strong><span id="total"></span></strong></p>
     <button id="print" onclick="print()" style="display: none;">Print Proof</button>
+
+    <h2>Shift Summary</h2>
+    <p><strong>Most Bought Item:</strong> <span id="mostBought"></span></p>
+    <p><strong>Least Bought Item:</strong> <span id="leastBought"></span></p>
+    <p><strong>Total Revenue:</strong> <span id="totalRevenue"></span></p>
   </main>
   <script>
     function checkEnteredUser(){
@@ -206,27 +218,48 @@
 
 
     function loadOrders(currency) {
-  fetch('/get-shift-orders')
-    .then((response) => response.json())
-    .then((orders) => {
-      let total = 0
-     orders.forEach(order => {
-      
-      total = total + order.price
-      
-     })
-     document.getElementById("total").textContent = total +`${currency}`
-     if(total !== 0){
-      const btn = document.getElementById("print")
-      btn.style.display = "block"
-     }
-    })
-    .catch((error) => {
-      console.error('Error loading orders:', error);
-    
-    });
-}
+    fetch('/get-shift-orders')
+        .then((response) => response.json())
+        .then((orders) => {
+          
+            let total = 0;
+            const itemCounts = {};
 
+            // Assuming orders is an array of orders with properties like id, name, price, etc.
+            orders.forEach((order) => {
+                total += order.price;
+
+                // Assuming order contains item information directly
+                const itemName = order.name; // Update this according to your data structure
+
+                if (itemCounts[itemName]) {
+                    itemCounts[itemName]++;
+                } else {
+                    itemCounts[itemName] = 1;
+                }
+            });
+
+            const mostBought = Object.keys(itemCounts).reduce((a, b) =>
+                itemCounts[a] > itemCounts[b] ? a : b
+            );
+            const leastBought = Object.keys(itemCounts).reduce((a, b) =>
+                itemCounts[a] < itemCounts[b] ? a : b
+            );
+
+            document.getElementById("total").textContent = total + `${currency}`;
+            document.getElementById("mostBought").textContent = mostBought || "None";
+            document.getElementById("leastBought").textContent = leastBought || "None";
+            document.getElementById("totalRevenue").textContent = total + `${currency}`;
+
+            if (total !== 0) {
+                const btn = document.getElementById("print");
+                btn.style.display = "block";
+            }
+        })
+        .catch((error) => {
+            console.error('Error loading orders:', error);
+        });
+}
 function print(){
   fetch('/get-shift-orders')
     .then((response) => response.json())

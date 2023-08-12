@@ -47,7 +47,7 @@
     }
 
 form {
-  background-color: #fff;
+  background-color: #333;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -75,7 +75,7 @@ form select {
 }
 
 form button {
-  background-color: #333;
+  background-color: #444;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -85,7 +85,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #444;
+  background-color: #555;
 }
 
 form .success-message {
@@ -102,7 +102,8 @@ form .error-message {
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background-color: #f7f7f7;
+      color: #fff;
+      background-color: #444;
     }
 
     header {
@@ -157,7 +158,7 @@ form .error-message {
     }
 
     .menu-item {
-      background-color: #fff;
+      background-color: #333;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       padding: 20px;
@@ -204,7 +205,7 @@ form .error-message {
       margin: 0;
     }
 #li{
-    background-color: #fff;
+    background-color: #333;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       padding: 20px;
@@ -213,10 +214,11 @@ form .error-message {
       text-align: center;
       transition: transform 0.3s ease;
       list-style-type: none;
+      color: #fff;
 }
 
 #li:hover{
-  background-color: lightgrey;
+  background-color: #555;
   transition: .5s;
   
 }
@@ -231,23 +233,51 @@ form .error-message {
 }
 #btn:hover{
     transition: .5s;
-    background-color: lightgrey;
+    background-color: #444;
     border-color: transparent;
 }
-.delete-button {
-    background-color: #ff5050;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
+.in-stock-button {
+  background-color: #22bb33; /* Choose your desired color */
+  color: #fff;
+}
 
-  .delete-button:hover {
-    background-color: #ff3333;
-  }
+/* Style for "Out of Stock" state of the button */
+.out-of-stock-button {
+  
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+/* Style for the delete button */
+.delete-button {
+  background-color: #ff5050; /* Choose your desired color */
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #ff3333;
+}
+
+/* Ensure buttons appear on separate lines */
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 
   #notificationContainer {
     position: fixed;
@@ -286,29 +316,24 @@ form .error-message {
 }
 #allbtn:hover{
     border-color: transparent;
-    background-color: lightgrey;
+    background-color: #444;
     transition: .5s;
     
 }
 
-#add, #addc, #removec, #refresh{
-  
-  border-color: transparent;
-  background-color: transparent;
-}
-#addlist, #removeclist, #addclist{
-  display: none;
-}
-
-#addlist.show, #removeclist.show, #addclist.show{
-  display: block;
-
-  transition: .5s;
-}
 
 #formh1{
-  margin-left: 35vw
+  text-align: center;
 }
+body input{
+  background-color: #333;
+  color: #fff;
+}
+body input option{
+  background-color: #333;
+}
+
+
 
   </style>
 </head>
@@ -335,14 +360,7 @@ form .error-message {
     <!-- Menu items will be loaded dynamically here -->
   </ul>
 
-  <ul id="menuList" class="menu-container">
-    <button  id="add"><li id="li"><ion-icon name="add-outline" id="btn1"></ion-icon><h2>Add Item</h2></li></button>
-    <button  id="addc"><li id="li"><ion-icon name="copy-outline" id="btn1"></ion-icon><h2>Add category(ies)</h2></li></button>
-    <button  id="removec"><li id="li"><ion-icon name="trash-outline" id="btn1"></ion-icon><h2>Remove category(ies)</h2></li></button>
-    <button id="refresh"> <li id="li"><ion-icon name="refresh-outline" id="btn1"></ion-icon><h2>Refresh</h2></li></button>
-    
-    
-  </ul>
+
 <div id="addlist">
   <h1 id="formh1">Add Item to Menu</h1>
   <form id="menuForm" enctype="multipart/form-data">
@@ -356,6 +374,10 @@ form .error-message {
       </select>
       <label for="itemImage">Item Image:</label>
       <input type="file" id="itemImage" name="itemImage">
+      <label for="itemPlacement">Item Placement:</label>
+      <input type="text" id="itemPlacement" name="itemPlacement">
+      <label for="itemTime">Estimated time:</label>
+      <input type="text" id="itemTime" name="itemTime">
       <button type="submit" name="addItem">Add to Menu</button>
     </form>
 </div>
@@ -447,30 +469,8 @@ function showNotification(message, duration) {
     // Append the close button to the notification container
     notificationContainer.appendChild(closeButton);
 }
-const refresh = document.getElementById("refresh")
-  refresh.addEventListener("click", () => {
-    location.reload()
-  })
-  const add = document.getElementById("add")
-  const addlist = document.getElementById("addlist")
-  add.addEventListener("click", () => {
-    
-    addlist.classList.toggle("show")
-  })
-  const removec = document.getElementById("removec")
-  const removeclist = document.getElementById("removeclist")
-  removec.addEventListener("click", () => {
-    
-    removeclist.classList.toggle("show")
-    removec.classList.toggle("show")
-  })
-  const addc = document.getElementById("addc")
-  const addclist = document.getElementById("addclist")
-  addc.addEventListener("click", () => {
-    
-    addclist.classList.toggle("show")
-  })
 
+  
 
 
 // Function to create a delete button for a menu item
@@ -566,42 +566,132 @@ fetch('/api/categories')
 
 
 function createMenuItem(item, currency) {
-const listItem = document.createElement('li');
-listItem.classList.add('menu-item');
-listItem.classList.add(item.category); // Add the category as a class
-listItem.innerHTML = `
-  <img src="${item.image}" alt="${item.name}">
-  <p>${item.name}</p>
-  <p>Price: ${item.price}${currency}</p>
-`;
+  const listItem = document.createElement('li');
+  listItem.classList.add('menu-item');
+  listItem.classList.add(item.category);
 
-// Create the delete button for this item
-const deleteButton = createDeleteButton(item.id);
-listItem.appendChild(deleteButton);
+  listItem.innerHTML = `
+    <img src="${item.image}" alt="${item.name}">
+    <p>${item.name}</p>
+    <p>Price: ${item.price}${currency}</p>
+  `;
 
-return listItem;
+  // Create the delete button for this item
+  const deleteButton = createDeleteButton(item.id);
+  listItem.appendChild(deleteButton);
+
+  // Create the "Out of Stock" button for this item
+  const outOfStockButton = document.createElement('button');
+  outOfStockButton.textContent = item.out_of_stock === 1 ? 'Put Back in Stock' : 'Out of Stock';
+  outOfStockButton.classList.add('out-of-stock-button');
+  outOfStockButton.addEventListener('click', () => toggleItemStockStatus(item, listItem, outOfStockButton));
+  listItem.appendChild(outOfStockButton);
+
+  // Apply styles for "Out of Stock" items
+  if (item.out_of_stock === 1) {
+    listItem.classList.add('out-of-stock');
+  }
+
+  return listItem;
 }
 
-function loadMenuItems(category = 'all', currency) {
-fetch('/api/menu')
-  .then((response) => response.json())
-  .then((data) => {
-    menuList.innerHTML = ''; // Clear the previous content
-    data.forEach((item) => {
-      if (category === 'all' || item.category === category) {
-        const listItem = createMenuItem(item, currency);
-      
-        menuList.appendChild(listItem);
+function loadMenuItems(category = 'all') {
+        fetch(`/api/menu?category=${encodeURIComponent(category)}`)
+          .then((response) => response.json())
+          .then((data) => {
+            menuList.innerHTML = '';
+    
+            data.forEach((item) => {
+              const listItem = document.createElement('li');
+              listItem.classList.add('menu-item');
+              listItem.classList.add(item.category);
+    
+              listItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <p>${item.name}</p>
+                <p>Price: ${item.price}$</p>
+              `;
+    
+              // Create the "Out of Stock" button
+              const outOfStockButton = document.createElement('button');
+              outOfStockButton.textContent = item.out_of_stock === 1 ?  'Out of Stock': 'Put Back in Stock' ;
+              outOfStockButton.classList.add('out-of-stock-button');
+    
+              outOfStockButton.addEventListener('click', () => {
+                toggleItemStockStatus(item.id, listItem, outOfStockButton);
+              });
+            
+    
+              listItem.appendChild(outOfStockButton);
+              if (item.out_of_stock === 1) {
+                outOfStockButton.style.backgroundColor = "rgb(255, 51, 51)"
+    
+      }else{
+        outOfStockButton.style.backgroundColor = "rgb(34, 187, 51)"
+       
       }
-
-     
+              // Create the delete button
+              const deleteButton = document.createElement('button');
+              deleteButton.textContent = 'Delete';
+              deleteButton.classList.add('delete-button');
+    
+              deleteButton.addEventListener('click', () => {
+                deleteMenuItem(item.id, listItem);
+              });
+    
+              listItem.appendChild(deleteButton);
+    
+              menuList.appendChild(listItem);
+            });
+          })
+          .catch((error) => {
+            console.error('Error loading menu:', error);
+          });
+      }
+    
+      // Function to toggle the stock status of an item
+      function toggleItemStockStatus(itemId, listItem, outOfStockButton) {
+        const newStatus = outOfStockButton.textContent === 'Put Back in Stock' ? 1 : 2;
+    
+        fetch(`/api/toggle-stock/${itemId}/${newStatus}`, { method: 'POST' })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              // Update the item's appearance and the button text
+              window.location.reload()
+              showNotification('Stock status updated', 5000);
+              listItem.classList.toggle('out-of-stock');
+              outOfStockButton.textContent = newStatus === 1 ? 'Put Back in Stock' : 'Out of Stock';
+            } else {
+              console.error('Error updating stock status:', data.error);
+            }
+          })
+          .catch((error) => {
+            console.error('Error updating stock status:', error);
+          });
+      }
+function markItemOutOfStock(itemId) {
+  fetch(`/api/mark-out-of-stock/${itemId}`, { method: 'POST' })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // Display a success message and update the item's appearance
+        showNotification('Item marked as Out of Stock', 5000);
+        const listItem = menuList.querySelector(`[data-item-id="${itemId}"]`);
+        listItem.classList.add('out-of-stock'); // Add a CSS class to style the item as "Out of Stock"
+      } else {
+        console.error('Error marking item as Out of Stock:', data.error);
+      }
+    })
+    .catch((error) => {
+      console.error('Error marking item as Out of Stock:', error);
     });
-
-  })
-  .catch((error) => {
-    console.error('Error loading menu:', error);
-  });
 }
+
+
+
+
+
 
 menuList.addEventListener("click", function(event) {
     const target = event.target;
@@ -787,6 +877,8 @@ function showNotification(message, duration) {
       const itemPrice = formData.get('itemPrice');
       const itemCategory = formData.get('itemCategory');
       const itemImageFile = formData.get('itemImage');
+      const itemPlacement = formData.get("itemPlacement")
+      const itemTime = formData.get("itemTime")
   
       // Validate form data
       if (!itemName || isNaN(parseFloat(itemPrice)) || !itemCategory) {
@@ -802,6 +894,9 @@ function showNotification(message, duration) {
       if (itemImageFile) {
         formDataToSend.append('itemImage', itemImageFile);
       }
+      formDataToSend.append("itemPlacement", itemPlacement)
+      formDataToSend.append("itemTime", itemTime)
+      alert(itemTime)
       showNotification(`Successfully added ${itemName} to ${itemCategory}`, 5000)
       // Fetch request to the server to add the item
       fetch('/add-to-menu', {

@@ -1,28 +1,58 @@
-const sqlite3 = require("sqlite3").verbose()
-const db = new sqlite3.Database('./databases/files/temporders.db', (err) => {
-    if (err) {
-      console.error('Error opening database:', err.message);
-    } else {
-      console.log('Successfully connected to the cashier\'s database.');
-    }
-  });
-  
-  // Create the temporders table if it doesn't exist
-  db.run(`
-    CREATE TABLE IF NOT EXISTS orders (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT,
-      price REAL,
-      tableNumber INTEGER,
-      category TEXT,
-      status TEXT DEFAULT 'Not sent',
-      cashierName TEXT,
-      note TEXT
-    )
-  `, (err) => {
-    if (err) {
-      console.error('Error creating table:', err.message);
-    }
-  });
+const mysql = require("mysql2");
 
-  module.exports = db
+const db = mysql.createConnection({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  port: process.env.MYSQL_PORT
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database:', err.message);
+  } else {
+    console.log('Successfully connected to the cashier\'s database.');
+    
+    // Create the orders1 table if it doesn't exist
+    db.query(`
+      CREATE TABLE IF NOT EXISTS orders1 (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name TEXT,
+        price FLOAT,
+        tableNumber BIGINT,
+        category VARCHAR(255),
+        status VARCHAR(255) DEFAULT 'Not sent',
+        cashierName VARCHAR(255),
+        note TEXT
+      )
+    `, (err) => {
+      if (err) {
+        console.error('Error creating table:', err.message);
+      }
+    });
+
+    // Create the kitchen_orders table if it doesn't exist
+    db.query(`
+      CREATE TABLE IF NOT EXISTS kitchen_orders (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name TEXT,
+        price FLOAT,
+        tableNumber BIGINT,
+        category VARCHAR(255),
+        status VARCHAR(255) DEFAULT 'Not sent',
+        cashierName VARCHAR(255),
+        note TEXT,
+        placement VARCHAR(255)
+      )
+    `, (err) => {
+      if (err) {
+        console.error('Error creating kitchen_orders table:', err.message);
+      }
+    });
+
+  
+  }
+});
+
+module.exports = db;

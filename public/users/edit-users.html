@@ -13,7 +13,8 @@
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background-color: #f7f7f7;
+      color: #fff;
+      background-color: #444;
     }
 
     header {
@@ -32,7 +33,7 @@
       max-width: 600px;
       margin: 20px auto;
       padding: 20px;
-      background-color: #fff;
+      background-color: #333;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
@@ -51,12 +52,12 @@
     }
 
     th {
-      background-color: #f2f2f2;
+      background-color: #222;
       font-weight: 700;
     }
 
     tr:nth-child(even) {
-      background-color: #f2f2f2;
+      background-color: #444;
     }
 
     tr:hover {
@@ -133,10 +134,11 @@
       <label for="newRole">Role:</label>
       <select id="newRole" required>
         <option value="">Select Role</option>
-        <option value="cashier">Cashier</option>
-        <option value="menu editor">Menu Editor</option>
-        <option value="user manager">User Manager</option>
-        <option value="finance">Finance</option>
+  <option value="cashier">Cashier</option>
+  <option value="menu editor">Menu Editor</option>
+  <option value="user manager">User Manager</option>
+  <option value="finance">Finance</option>
+  <option value="kitchen staff">Kitchen Staff</option>
       </select>
       <button type="submit">Create User</button>
     </form>
@@ -194,41 +196,41 @@
     }
 
     async function createUser(event) {
-      event.preventDefault();
-      const newUsername = document.getElementById('newUsername').value;
-      const newPassword = document.getElementById('newPassword').value;
-      const newRole = document.getElementById('newRole').value;
+    event.preventDefault();
+    const newUsername = document.getElementById('newUsername').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const newRole = document.getElementById('newRole').value;
 
-      if (!newUsername || !newPassword || !newRole) {
-        alert('Please fill in all fields.');
-        return;
-      }
-
-      try {
-        const response = await fetch('http://localhost:3000/api/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username: newUsername, password: newPassword, role: newRole })
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to create user.');
-        }
-
-        // Clear the form fields after successful creation
-        document.getElementById('newUsername').value = '';
-        document.getElementById('newPassword').value = '';
-        document.getElementById('newRole').value = '';
-
-        // Refresh the user list
-        fetchUsers();
-      } catch (error) {
-        console.error('Error creating user:', error);
-        alert('An error occurred while creating the user.');
-      }
+    if (!newUsername || !newPassword || !newRole) {
+      alert('Please fill in all fields.');
+      return;
     }
+
+    try {
+      const response = await fetch('http://localhost:3000/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: newUsername, password: newPassword, role: newRole })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create user.');
+      }
+
+      // Clear the form fields after successful creation
+      document.getElementById('newUsername').value = '';
+      document.getElementById('newPassword').value = '';
+      document.getElementById('newRole').value = '';
+
+      // Refresh the user list
+      fetchUsers();
+    } catch (error) {
+      console.error('Error creating user:', error);
+      alert('An error occurred while creating the user.');
+    }
+  }
 
     async function deleteUser(userId) {
       if (confirm('Are you sure you want to delete this user?')) {

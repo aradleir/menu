@@ -1,22 +1,35 @@
-const sqlite3 = require("sqlite3").verbose();
-const qrCodesDb = new sqlite3.Database('./databases/files/qrcodes.db', (err) => {
-  if (err) {
-    console.error('Error opening database:', err.message);
-  } else {
-    console.log('Successfully connected to the QR database.');
-  }
+const mysql = require('mysql2');
+
+const qrCodesDb = mysql.createConnection({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  port: process.env.MYSQL_PORT
 });
 
-// Create the qrcodes table if it doesn't exist
-qrCodesDb.run(`
-  CREATE TABLE IF NOT EXISTS qrcodes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    qrData TEXT,
-    tableNumber INTEGER
-  )
-`, (err) => {
+qrCodesDb.connect((err) => {
   if (err) {
-    console.error('Error creating table:', err.message);
+    console.error('Error connecting to the database:', err.message);
+  } else {
+    console.log('Successfully connected to the QR database.');
+
+   // Update the CREATE TABLE statement in your database code
+   
+   // Create the qrcodes table
+   qrCodesDb.query(`
+     CREATE TABLE IF NOT EXISTS qrcodes (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       qrData TEXT,
+       tableNumber VARCHAR(255) -- Use an appropriate length for your tableNumber
+     )
+   `, (err) => {
+     if (err) {
+       console.error('Error creating table:', err.message);
+     }
+   });
+
+
   }
 });
 

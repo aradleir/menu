@@ -299,8 +299,15 @@ function loadCategoryItems(category, currency) {
             <img src="${item.image}" alt="${item.name}">
             <p>${item.name}</p>
             <p>Price: ${item.price}${currency}</p>
+            <p>Estimated time: ${item.time}</p>
           `;
+          let i =item.out_of_stock;
+          let inStock = Boolean;
+          if( i== 2) inStock = true
+          else inStock = false;
+          if(inStock == true){
           menuList.appendChild(listItem);
+          }
 
           // Add the order button for each menu item
           const orderButton = document.createElement('button');

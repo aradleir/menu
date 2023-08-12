@@ -928,6 +928,28 @@ function updateSummary(orders) {
                 fetch('/api/orders')
                     .then((response) => response.json())
                     .then((orders) => {
+
+                      function formatOrderTime(orderTime) {
+    const orderDateTime = new Date(orderTime);
+    const gmtOffset = 3; // GMT+3
+
+    // Adjust the time based on the GMT offset
+    orderDateTime.setHours(orderDateTime.getHours() + gmtOffset);
+
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short',
+    };
+
+    const formattedDateTime = orderDateTime.toLocaleString('en-US', options);
+    return formattedDateTime;
+}
+
                         // Clear existing orders from both views
                         orderContainer.innerHTML = '';
                         tableViewBody.innerHTML = '';
@@ -947,7 +969,8 @@ function updateSummary(orders) {
                             category.textContent = `Category: ${order.category}`;
 
                             const orderTime = document.createElement('p');
-                            orderTime.textContent = `Order Time: ${order.orderTime}`;
+                            const fullOrderTime = formatOrderTime(order.orderTime)
+                            orderTime.textContent = `Order Time: ${fullOrderTime}`;
 
                             const orderCashier = document.createElement("p")
                             orderCashier.textContent = `Cashier: ${order.cashier}`
@@ -965,7 +988,7 @@ function updateSummary(orders) {
                                 <td>${order.name}</td>
                                 <td>${order.price}${currency}</td>
                                 <td>${order.category}</td>
-                                <td>${order.orderTime}</td>
+                                <td>${fullOrderTime}</td>
                                 <td>${order.cashier}</td>
                             `;
                             tableViewBody.appendChild(row);

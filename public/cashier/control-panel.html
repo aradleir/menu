@@ -9,7 +9,8 @@
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background-color: #f7f7f7;
+      background-color: #444;
+      color: #fff;
     }
 
     header {
@@ -23,7 +24,7 @@
       max-width: 900px;
       margin: 20px auto;
       padding: 20px;
-      background-color: #fff;
+      background-color: #333;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
@@ -40,7 +41,7 @@
     #mainDiv {
       margin-top: 20px;
       padding: 10px;
-      background-color: #f0f0f0;
+      background-color: #333;
       border-radius: 5px;
     }
 
@@ -168,6 +169,7 @@
             <th>Cashier Name</th>
             <th>Notes</th>
             <th>Status</th>
+            <th>Action</th>
             
           </tr>
         </thead>
@@ -267,15 +269,18 @@
       // For example, you can use window.print() to open the print dialog
       window.print();
     }
-    function updateOrderStatus(orderId, newStatus) {
-  fetch('/update-order-status', {
+    function updateOrderStatus(id, newStatus) {
+  fetch('/api/update-order-status', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ id: orderId, status: newStatus }),
+    
+    body: JSON.stringify({ id, newStatus }),
+    
   })
     .then((response) => {
+      
       if (!response.ok) {
         throw new Error('Error updating order status');
       }
@@ -288,10 +293,16 @@
     });
 }
 
+
 function extractNumbersFromString(inputString) {
+  if (typeof inputString !== 'string') {
+    return [];
+  }
   const regex = /\d+/g;
-  return inputString.match(regex).map(Number);
+  const matchResult = inputString.match(regex);
+  return matchResult ? matchResult.map(Number) : [];
 }
+
 
 function loadOrders() {
   fetch('/get-orders')
@@ -314,21 +325,22 @@ function loadOrders() {
           // If it's not a new order, add an empty td to maintain the table structure
           row.innerHTML = '<td></td>';
         }
-
+       
         row.innerHTML += `
           <td>${order.id}</td>
           <td>${order.name}</td>
           <td>${order.price}</td>
-          <td>${extractNumbersFromString(order.tableNumber)}</td>
+          <td>${order.tableNumber}</td>
           <td>${order.category}</td>
           <td>${order.cashierName}</td>
           <td>${order.note}</td>
-          <td class="dropdown">
-            ${order.status}
-            <div class="dropdown-content">
-              <a href="#" onclick="sendToKitchen(${order.id}, '${order.name}', ${order.price}, '${order.tableNumber}', '${order.category}', '${order.note}')">Send to kitchen</a>
-            </div>
-          </td>
+          <td>${order.status}</td>
+<td>
+  <button onclick="updateAndSendToKitchen(${order.id}, '${order.name}', ${order.price}, '${order.tableNumber}', '${order.category}', '${order.note}', '${order.status}')">
+    ${order.status === 'Not sent' ? 'Send to Kitchen' : order.status}
+  </button>
+</td>
+          
         `;
         tableBody.appendChild(row);
       });
@@ -348,31 +360,104 @@ function loadOrders() {
     });
 }
 
+
 function sendToKitchen(id, name, price, tableNumber, category, note) {
-  const newWindow = window.open('', '_blank');
-  const content = generatePrintContent(name, price, tableNumber, category, note);
-
-  newWindow.document.write(content);
-  newWindow.window.print()
-  newWindow.document.close();
-
-  // Send a request to the server to update the status of the order to 'Send to kitchen'
-  fetch('/api/update-order-status', {
+  // Fetch the file placement for the selected item
+  fetch('/api/get-file-placement', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ orderId: id, status: 'Send to kitchen' }),
+    body: JSON.stringify({ itemName: name }),
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      console.log('Order status updated successfully');
+    .then((response) => response.json())
+    .then((placementData) => {
+      const { placement } = placementData;
+
+      // Send the order to the kitchen with the correct placement
+      fetch('/api/send-order-to-kitchen', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          price,
+          tableNumber,
+          category,
+          note,
+          placement,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          // Update the order status in the frontend
+          updateOrderStatus(id, 'Sent to kitchen'); // Set the status to "Sent to kitchen"
+          loadOrders(); // Reload the orders
+        })
+        .catch((error) => {
+          console.error('Error sending order to kitchen:', error);
+          alert('Error sending order to kitchen. Please try again later.');
+        });
     })
     .catch((error) => {
-      console.error('Error updating order status:', error);
-      alert('Error updating order status. Please try again later.');
+      console.error('Error fetching file placement:', error);
+      alert('Error fetching file placement. Please try again later.');
+    });
+}
+function updateAndSendToKitchen(id, name, price, tableNumber, category, note, status) {
+  if(status == "Not sent"){
+  updateOrderStatus(id, 'Sent to kitchen'); 
+  }else{
+    alert("You cannot change the status beyond this point!")
+  }
+  // Fetch the file placement for the selected item
+  fetch('/api/get-file-placement', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ itemName: name }),
+  })
+    .then((response) => response.json())
+    .then((placementData) => {
+      const { placement } = placementData;
+
+      // Send the order to the kitchen with the correct placement
+      fetch('/api/send-order-to-kitchen', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          price,
+          tableNumber,
+          category,
+          note,
+          placement,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          const button = document.querySelector(`button[data-order-id="${id}"]`);
+    if (button) {
+      button.textContent = 'Sent to kitchen';
+    }
+          loadOrders();
+        })
+        .catch((error) => {
+          console.error('Error sending order to kitchen:', error);
+          alert('Error sending order to kitchen. Please try again later.');
+        });
+    })
+    .catch((error) => {
+      console.error('Error fetching file placement:', error);
+      alert('Error fetching file placement. Please try again later.');
     });
 }
 
