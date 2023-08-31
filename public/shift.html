@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Basic Page Info -->
+		<meta charset="utf-8" />
+		<title>Shift</title>
+
+		
+
+		<!-- Mobile Specific Metas -->
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="vendors/styles/icon-font.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+		></script>
+		<script
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-GBZ3SGGX85");
+		</script>
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+		</script>
+		<!-- End Google Tag Manager -->
+	</head>
+	<body>
+		
+
+		<div class="header">
+			<div class="header-left">
+				<div class="menu-icon bi bi-list"></div>
+				<div
+					class="search-toggle-icon bi bi-search"
+					data-toggle="header_search"
+				></div>
+				<div class="header-search">
+					<!--Nothing here-->
+				</div>
+			</div>
+			<div class="header-right">
+				<div class="dashboard-setting user-notification">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle no-arrow"
+							href="javascript:;"
+							data-toggle="right-sidebar"
+						>
+							<i class="dw dw-settings2"></i>
+						</a>
+					</div>
+				</div>
+				
+		
+				<div class="user-info-dropdown">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						>
+							<span class="user-icon">
+								<img src="src/images/person-circle-outline.svg" alt="" />
+							</span>
+							<span class="user-name" id="user-name1"></span>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+						>
+							
+						
+							<a class="dropdown-item" href="login.html"
+								><i class="dw dw-logout"></i> Log Out</a
+							>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="right-sidebar">
+			<div class="sidebar-title">
+				<h3 class="weight-600 font-16 text-blue">
+					Layout Settings
+					<span class="btn-block font-weight-400 font-12"
+						>User Interface Settings</span
+					>
+				</h3>
+				<div class="close-sidebar" data-toggle="right-sidebar-close">
+					<i class="icon-copy ion-close-round"></i>
+				</div>
+			</div>
+			<div class="right-sidebar-body customscroll">
+				<div class="right-sidebar-body-content">
+					<h4 class="weight-600 font-18 pb-10">Header Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-white active"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-dark"
+							>Dark</a
+						>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-light"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-dark active"
+							>Dark</a
+						>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+					<div class="sidebar-radio-group pb-10 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-1"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebaricon-1"
+								><i class="fa fa-angle-down"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-2"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-2"
+							/>
+							<label class="custom-control-label" for="sidebaricon-2"
+								><i class="ion-plus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-3"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-3"
+							/>
+							<label class="custom-control-label" for="sidebaricon-3"
+								><i class="fa fa-angle-double-right"></i
+							></label>
+						</div>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+					<div class="sidebar-radio-group pb-30 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-1"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-1"
+								><i class="ion-minus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-2"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-2"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-2"
+								><i class="fa fa-circle-o" aria-hidden="true"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-3"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-3"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-3"
+								><i class="dw dw-check"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-4"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-4"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-4"
+								><i class="icon-copy dw dw-next-2"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-5"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-5"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-5"
+								><i class="dw dw-fast-forward-1"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-6"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-6"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-6"
+								><i class="dw dw-next"></i
+							></label>
+						</div>
+					</div>
+
+					<div class="reset-options pt-30 text-center">
+						<button class="btn btn-danger" id="reset-settings">
+							Reset Settings
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="left-side-bar">
+			<div class="brand-logo">
+				
+				<div class="close-sidebar" data-toggle="left-sidebar-close">
+					<i class="ion-close-round"></i>
+				</div>
+			</div>
+			<div class="menu-block customscroll">
+				<div class="sidebar-menu">
+					<ul id="accordion-menu">
+						<li>
+							<div class="sidebar-small-cap">Main</div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">Home</span>
+							</a>
+							<ul class="submenu">
+								<li><a  onclick="dashboard()">Dashboard</a></li>
+							</ul>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Ordering </div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-cash"></span
+								><span class="mtext">Register</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="control()">Control Panel</a></li>
+								<li><a onclick="qr()">QR Generation</a></li>
+								<li><a onclick="change()">Change Table</a></li>
+								<li><a onclick="dineout()">Dine out/Delivery</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-cup"></span>
+
+								<span class="mtext">Kitchen</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="kitchen()">Kitchen Orders</a></li>
+								
+							</ul>
+						</li>
+						
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-card-checklist"></span>
+
+								<span class="mtext">Main Menu</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="menu()">Menu</a></li>
+								
+							</ul>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Management </div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-people"></span>
+
+								<span class="mtext">Users</span>
+							</a>
+							
+							<ul class="submenu">
+								<li><a onclick="editusers()">Edit Users</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-person-check"></span>
+
+								<span class="mtext">Shifts</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="shift()" class="active">Shift Mangement</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-graph-up"></span>
+
+								<span class="mtext">Finance</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="orders()">All orders</a></li>
+								
+							</ul>
+						</li>
+			
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+
+        <div class="main-container">
+			<div class="pd-ltr-20">
+				
+				<div class="row">
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-50-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<span class="material-icons-outlined" style="font-size: 40px;">attach_money</span>
+								</div>
+								<div class="widget-data">
+									<div class="h6 mb-0">Revenue <br></div>
+                                    <br>
+									<div class="weight-600 font-14" id="total"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="col-xl-3 mb-30">
+						<div class="card-box height-50-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<span class="material-icons-outlined" style="font-size: 40px;">star</span>
+								</div>
+								<div class="widget-data">
+									<div class="h6 mb-0">Most bought item</div>
+                                   
+									<div class="weight-600 font-14" id="mostBought"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="col-xl-3 mb-30">
+						<div class="card-box height-50-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<span class="material-icons-outlined" style="font-size: 40px;">fmd_bad</span>
+								</div>
+								<div class="widget-data">
+									<div class="h6 mb-0">Least bought item</div>
+                                   
+									<div class="weight-600 font-14" id="leastBought"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="col-xl-3 mb-30">
+						<div class="card-box height-50-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<span class="material-icons-outlined" style="font-size: 40px;">data_array</span>
+								</div>
+								<div class="widget-data">
+									<div class="h6 mb-0">Items ordered during shift</div>
+                                   
+									<div class="weight-600 font-14" id="currentOrders"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="pd-ltr-20">
+                        <div class="card-box pd-20 height-150-p mb-30">
+                            <div class="row align-items-center">
+                                
+                                <div class="col-md-8" style="width: 1025px;">
+                                    
+                                    <h2>Shift Management</h2>
+  
+                                    <!-- Display the current active shift -->
+                                    <p>Current Active Shift: <span id="currentShift"></span></p>
+                                  
+                                    <!-- Select a cashier to start or end their shift -->
+                                    <label for="cashierList"><h4 class="font-20 weight-500 mb-10 text-capitalize">
+                                     Select Cashier:
+                                     
+                                    </h4></label>
+                                    <select id="cashierList" style="padding: 10px; border-radius: 5px;">
+                                      <!-- Cashier options will be added dynamically here -->
+                                    </select>
+                                  
+                                    <button onclick="startShift()" class="btn btn-primary">Start Shift</button>
+                                    <button onclick="endShift()" class="btn btn-danger">End Shift</button>
+                                   
+                                </div>
+                            </div>
+                        </div>
+					</div>
+					
+				</div>
+       
+
+
+
+		   <!-- Material Icons -->
+		   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+		<!-- js -->
+		<script src="vendors/scripts/core.js"></script>
+		<script src="vendors/scripts/script.min.js"></script>
+		<script src="vendors/scripts/process.js"></script>
+		<script src="vendors/scripts/layout-settings.js"></script>
+		<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="vendors/scripts/dashboard.js"></script>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden"
+			></iframe
+		></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+        <script>
+            function checkEnteredUser(){
+            const urlParams = new URLSearchParams(window.location.search);
+              const code = urlParams.get('code');
+              const username = urlParams.get('username');
+              const role = urlParams.get('role');
+            if(!code || !username || !role){
+              return window.location.href = "/menu.html"
+            }
+            if(role =="user manager" || role =="admin"){
+        
+            }else{
+              return window.location.href = "/menu.html"
+            }
+          }
+          checkEnteredUser()
+		  function userName(){
+
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+
+const i1 = document.getElementById("user-name1");
+i1.textContent = username
+}
+userName()
+
+function kitchen() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `kitchen.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function shift() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `shift.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function qr() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `qr.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function control() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `register.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function menu() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `menu.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function orders() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `orders.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function editusers() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `edit-users.html?code=${code}&role=${role}&username=${username}`;
+}
+
+function dashboard() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `dashboard.html?code=${code}&role=${role}&username=${username}`;
+}
+
+function dineout() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `dineout.html?code=${code}&role=${role}&username=${username}`;
+}
+function change(){
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `changetable.html?code=${code}&role=${role}&username=${username}`;
+}
+
+          </script>
+          <script>
+           function currentOrders(){
+    fetch('/get-orders-numbers')
+    .then((response) => response.json())
+    .then((orders) => {
+      const ordersCount = orders.length;
+      const ordersElement = document.getElementById("currentOrders");
+      ordersElement.textContent = ordersCount;
+    })
+    .catch((error) => {
+      console.error('Error loading orders:', error);
+    });
+}
+
+currentOrders();
+            async function fetchCashiers() {
+              try {
+                const response = await fetch('/api/cashiers');
+                const cashiers = await response.json();
+                const cashierList = document.getElementById('cashierList');
+        
+                cashierList.innerHTML = '';
+        
+                cashiers.forEach((cashier) => {
+                  const option = document.createElement('option');
+                  option.value = cashier.username;
+                  option.textContent = cashier.username;
+                  cashierList.appendChild(option);
+                });
+              } catch (error) {
+                console.error('Error fetching cashiers:', error);
+                alert('An error occurred while fetching cashiers.');
+              }
+            }
+        
+            async function fetchActiveShift() {
+              try {
+                const response = await fetch('/api/shift');
+                const activeShifts = await response.json();
+                const currentShiftElement = document.getElementById('currentShift');
+        
+                if (activeShifts.length === 0) {
+                  currentShiftElement.textContent = 'None';
+                } else {
+                  currentShiftElement.textContent = activeShifts.join(', ');
+                }
+              } catch (error) {
+                console.error('Error fetching active shift:', error);
+                alert('An error occurred while fetching active shift.');
+              }
+            }
+        
+            async function startShift() {
+              const selectedCashier = document.getElementById('cashierList').value;
+        
+              try {
+                const response = await fetch('/api/start-shift', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ username: selectedCashier })
+                });
+        
+                if (response.ok) {
+                  alert(`Shift started for ${selectedCashier}.`);
+                  fetchCashiers();
+                  fetchActiveShift();
+                } else {
+                  const errorData = await response.json();
+                  if (response.status === 400) {
+                    alert(errorData.error);
+                  } else {
+                    alert('Failed to start shift for the cashier.');
+                  }
+                }
+              } catch (error) {
+                console.error('Error starting shift:', error);
+                alert('An error occurred while starting the shift.');
+              }
+            }
+        
+        
+            async function endShift() {
+              const selectedCashier = document.getElementById('cashierList').value;
+        
+              try {
+                const response = await fetch('/api/end-shift', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ username: selectedCashier })
+                });
+        
+                if (response.ok) {
+                  alert(`Shift ended for ${selectedCashier}.`);
+                  fetchCashiers();
+                  fetchActiveShift();
+                  refreshPage()
+                } else {
+                  alert('Failed to end shift for the cashier.');
+                }
+              } catch (error) {
+                console.error('Error ending shift:', error);
+                alert('An error occurred while ending the shift.');
+              }
+            }
+        
+            // Fetch cashiers and active shift on page load
+            fetchCashiers();
+            fetchActiveShift();
+        
+        
+            function loadOrders(currency) {
+            fetch('/get-shift-orders')
+                .then((response) => response.json())
+                .then((orders) => {
+                  
+                    let total = 0;
+                    const itemCounts = {};
+        
+                    // Assuming orders is an array of orders with properties like id, name, price, etc.
+                    orders.forEach((order) => {
+                        total += order.price;
+        
+                        // Assuming order contains item information directly
+                        const itemName = order.name; // Update this according to your data structure
+        
+                        if (itemCounts[itemName]) {
+                            itemCounts[itemName]++;
+                        } else {
+                            itemCounts[itemName] = 1;
+                        }
+                    });
+        
+                    const mostBought = Object.keys(itemCounts).reduce((a, b) =>
+                        itemCounts[a] > itemCounts[b] ? a : b
+                    );
+                    const leastBought = Object.keys(itemCounts).reduce((a, b) =>
+                        itemCounts[a] < itemCounts[b] ? a : b
+                    );
+        
+                    document.getElementById("total").textContent = total + `${currency}`;
+                    document.getElementById("mostBought").textContent = mostBought || "None";
+                    document.getElementById("leastBought").textContent = leastBought || "None";
+                    document.getElementById("totalRevenue").textContent = total + `${currency}`;
+        
+                    if (total !== 0) {
+                        const btn = document.getElementById("print");
+                        btn.style.display = "block";
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading orders:', error);
+                });
+        }
+        function print(){
+          fetch('/get-shift-orders')
+            .then((response) => response.json())
+            .then((orders) => {
+              let total = 0
+             orders.forEach(order => {
+              
+              total = total + order.price
+              
+             })
+             const newWindow = window.open("", "_blanck")
+             newWindow.document.write(`Total cashier should pay: ${total}$`);
+            })
+            .catch((error) => {
+              console.error('Error loading orders:', error);
+            
+            });
+        }
+        
+        
+            function getCurrency(){
+            fetch('/api/env')
+              .then(response => response.json())
+              .then(data => {
+                // Update the HTML content with the environment variable values
+               loadOrders(data.currency)
+                
+              })
+              .catch(error => console.error('Error fetching environment variables:', error));
+            }
+            getCurrency()
+         
+        
+        function refreshPage(){
+          window.location.reload()
+        }
+          </script>
+	</body>
+</html>

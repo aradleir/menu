@@ -1,262 +1,853 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navigation Menu</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap">
-  <!-- Inline CSS style -->
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #fff;
-      background-color: #444;
-    }
+<html>
+	<head>
+		<!-- Basic Page Info -->
+		<meta charset="utf-8" />
+		<title>Admin Dashboard</title>
 
-    header {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-    }
+		
 
-    main {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 50vh;
-    }
+		<!-- Mobile Specific Metas -->
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1"
+		/>
 
-    .app-icons-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="vendors/styles/icon-font.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
 
-    .app-icon {
-      text-align: center;
-      margin-bottom: 20px;
-      background-color: #333;
-      padding: 10px;
-      border-radius: 10px;
-    }
-    .app-icon:hover{
-        transform: scale(1.1);
-        transition: .5s;
-    }
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+		></script>
+		<script
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
 
-    .app-icon ion-icon {
-      font-size: 36px;
-      color: #fff;
-      margin-bottom: 10px;
-    }
+			gtag("config", "G-GBZ3SGGX85");
+		</script>
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+		</script>
+		<!-- End Google Tag Manager -->
+	</head>
+	<body>
+		
 
-    .app-icon-text {
-      font-size: 14px;
-    }
+		<div class="header">
+			<div class="header-left">
+				<div class="menu-icon bi bi-list"></div>
+				<div
+					class="search-toggle-icon bi bi-search"
+					data-toggle="header_search"
+				></div>
+				<div class="header-search">
+					<!--Nothing here-->
+				</div>
+			</div>
+			<div class="header-right">
+				<div class="dashboard-setting user-notification">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle no-arrow"
+							href="javascript:;"
+							data-toggle="right-sidebar"
+						>
+							<i class="dw dw-settings2"></i>
+						</a>
+					</div>
+				</div>
+				
+		
+				<div class="user-info-dropdown">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						>
+							<span class="user-icon">
+								<img src="src/images/person-circle-outline.svg" alt="" />
+							</span>
+							<span class="user-name" id="user-name1"></span>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+						>
+							
+						
+							<a class="dropdown-item" href="login.html"
+								><i class="dw dw-logout"></i> Log Out</a
+							>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
 
-    #ee{
-      font-size: 50px;
-      text-align: center;
+		<div class="right-sidebar">
+			<div class="sidebar-title">
+				<h3 class="weight-600 font-16 text-blue">
+					Layout Settings
+					<span class="btn-block font-weight-400 font-12"
+						>User Interface Settings</span
+					>
+				</h3>
+				<div class="close-sidebar" data-toggle="right-sidebar-close">
+					<i class="icon-copy ion-close-round"></i>
+				</div>
+			</div>
+			<div class="right-sidebar-body customscroll">
+				<div class="right-sidebar-body-content">
+					<h4 class="weight-600 font-18 pb-10">Header Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-white active"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-dark"
+							>Dark</a
+						>
+					</div>
 
-    }
+					<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-light"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-dark active"
+							>Dark</a
+						>
+					</div>
 
-  </style>
-  <!-- End of Inline CSS style -->
-</head>
-<body>
-  <div id="dashboardContent">
-  <header>
-    <h1>Navigation</h1>
-  </header>
+					<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+					<div class="sidebar-radio-group pb-10 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-1"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebaricon-1"
+								><i class="fa fa-angle-down"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-2"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-2"
+							/>
+							<label class="custom-control-label" for="sidebaricon-2"
+								><i class="ion-plus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-3"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-3"
+							/>
+							<label class="custom-control-label" for="sidebaricon-3"
+								><i class="fa fa-angle-double-right"></i
+							></label>
+						</div>
+					</div>
 
-  <main>
-    <div class="app-icons-container">
-        <div class="app-icon" onclick="editmenu()">
-            <ion-icon name="create-outline"></ion-icon>
-            <div class="app-icon-text" >Edit Menu</div>
-          </div>
-          <div class="app-icon" onclick="window.open('./menu/menu.html', '_blank')">
-            <ion-icon name="list-outline"></ion-icon>
-            <div class="app-icon-text"> Menu</div>
-          </div>
-          <div class="app-icon" onclick="editusers()">
-            <ion-icon name="person-add-outline" ></ion-icon>
-            <div class="app-icon-text">Edit Users</div>
-          </div>
-          <div class="app-icon" onclick="users()">
-            <ion-icon name="person-outline" ></ion-icon>
-            <div class="app-icon-text">Users</div>
-          </div>
-          <div class="app-icon" onclick="qr()">
-            <ion-icon name="qr-code-outline"></ion-icon>
-            <div class="app-icon-text">QR Generation</div>
-          </div>
-          <div class="app-icon" onclick="control()">
-            <ion-icon name="cog-outline"></ion-icon>
-            <div class="app-icon-text">Control Panel</div>
-          </div>
-          <div class="app-icon" onclick="shifts()">
-            <ion-icon name="time-outline"></ion-icon>
-            <div class="app-icon-text">Shift management</div>
-          </div>
-          <div class="app-icon" onclick="orders()">
-            <ion-icon name="analytics-outline" ></ion-icon>
-            <div class="app-icon-text">All orders</div>
-          </div>
-          <div class="app-icon" onclick="kitchen()">
-            <ion-icon name="wine-outline"></ion-icon>
-            <div class="app-icon-text">Kitchen</div>
-          </div>
-          <div class="app-icon" onclick="logout()">
-            <ion-icon name="log-out-outline"></ion-icon>
-            <div class="app-icon-text">Log out</div>
-          </div>
-          
-  </div>
-  </main>
-</div>
+					<h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+					<div class="sidebar-radio-group pb-30 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-1"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-1"
+								><i class="ion-minus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-2"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-2"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-2"
+								><i class="fa fa-circle-o" aria-hidden="true"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-3"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-3"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-3"
+								><i class="dw dw-check"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-4"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-4"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-4"
+								><i class="icon-copy dw dw-next-2"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-5"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-5"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-5"
+								><i class="dw dw-fast-forward-1"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-6"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-6"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-6"
+								><i class="dw dw-next"></i
+							></label>
+						</div>
+					</div>
 
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script>
+					<div class="reset-options pt-30 text-center">
+						<button class="btn btn-danger" id="reset-settings">
+							Reset Settings
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-  function checkEnteredUser(){
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        const username = urlParams.get('username');
-        const role = urlParams.get('role');
-        
-        if(!code || !username || !role){
-          return window.location.href = "/menu/menu.html"
-        }else{
-  
-        }
-        
-        
-      }
-      checkEnteredUser()
-      </script>
-<script>
-  function kitchen(){
-    const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const username = urlParams.get('username');
-      const role = urlParams.get('role');
-      window.open(`kitchen/kitchen.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
-  }
-  function welcome(){
-    const urlParams = new URLSearchParams(window.location.search);
-      const username = urlParams.get('username');
-      const ee = document.getElementById("ee");
-      ee.textContent = `Welcome, ${username}`
-  }
-  welcome()
-  function shifts(){
-    const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const username = urlParams.get('username');
-      const role = urlParams.get('role');
-      window.open(`shift/shift-management.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
-  }
-  function qr(){
-    const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const username = urlParams.get('username');
-      const role = urlParams.get('role');
-      window.open(`cashier/qr.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
-  }
-  function control(){
-    const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const username = urlParams.get('username');
-      const role = urlParams.get('role');
-      window.open(`cashier/control-panel.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
-  }
-   function editusers(){
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const username = urlParams.get('username');
-      const role = urlParams.get('role');
-      window.open(`users/edit-users.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
-    }
+		<div class="left-side-bar">
+			<div class="brand-logo">
+				
+				<div class="close-sidebar" data-toggle="left-sidebar-close">
+					<i class="ion-close-round"></i>
+				</div>
+			</div>
+			<div class="menu-block customscroll">
+				<div class="sidebar-menu">
+					<ul id="accordion-menu">
+						<li>
+							<div class="sidebar-small-cap">Main</div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">Home</span>
+							</a>
+							<ul class="submenu">
+								<li><a class="active" onclick="dashboard()">Dashboard</a></li>
+							</ul>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Ordering </div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-cash"></span
+								><span class="mtext">Register</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="control()">Control Panel</a></li>
+								<li><a onclick="qr()">QR Generation</a></li>
+								<li><a onclick="change()">Change Table</a></li>
+								<li><a onclick="dineout()">Dine out/Delivery</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-cup"></span>
 
-    function editmenu(){
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const username = urlParams.get('username');
-      const role = urlParams.get('role');
-      window.open(`menu/edit-menu.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
-    }
-    function orders(){
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const username = urlParams.get('username');
-      const role = urlParams.get('role');
-      window.open(`finance/orders.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`, "_blank")
-    }
-    function users(){
-      const urlParams = new URLSearchParams(window.location.search)
-      const code = urlParams.get("code")
-      const username = urlParams.get("username")
-      const role = urlParams.get("role")
-      window.open(`users/view-users.html?code=${code}&role=${role}&username=${username}`, `_blank`)
-    }
-    function orders(){
-      const urlParams = new URLSearchParams(window.location.search)
-      const code = urlParams.get("code")
-      const username = urlParams.get("username")
-      const role = urlParams.get("role")
-      window.open(`finance/orders.html?code=${code}&role=${role}&username=${username}`, `_blank`)
-    }
-    async function checkCode() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const username = urlParams.get('username');
-      const role = urlParams.get('role');
+								<span class="mtext">Kitchen</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="kitchen()">Kitchen Orders</a></li>
+								
+							</ul>
+						</li>
+						
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-card-checklist"></span>
 
-      if (!code) {
-        // If the code is missing, redirect back to the login page
-        window.open('menu/menu.html', "_blank")
-      } else {
-        try {
-          const response = await fetch(`/api/codes/${code}`);
-       
-          if (response.ok) {
-            // Code is valid, show the dashboard
-            document.getElementById('dashboardContent').style.display = 'block';
+								<span class="mtext">Main Menu</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="menu()">Menu</a></li>
+								
+							</ul>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Management </div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-people"></span>
 
-            // Get the logged-in username and role from the URL query parameters
-            const loggedInUsernameElement = document.getElementById('loggedInUsername');
-            const loggedInUserRoleElement = document.getElementById('loggedInUserRole');
-            if (loggedInUsernameElement && loggedInUserRoleElement) {
-              loggedInUsernameElement.textContent = username || 'User';
-              loggedInUserRoleElement.textContent = role || 'Role';
+								<span class="mtext">Users</span>
+							</a>
+							
+							<ul class="submenu">
+								<li><a onclick="editusers()">Edit Users</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-person-check"></span>
+
+								<span class="mtext">Shifts</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="shift()">Shift Mangement</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-graph-up"></span>
+
+								<span class="mtext">Finance</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="orders()">All orders</a></li>
+								
+							</ul>
+						</li>
+			
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="mobile-menu-overlay"></div>
+
+		<div class="main-container">
+			<div class="pd-ltr-20">
+				<div class="card-box pd-20 height-100-p mb-30">
+					<div class="row align-items-center">
+						
+						<div class="col-md-8">
+							<h4 class="font-20 weight-500 mb-10 text-capitalize">
+								Welcome back
+								<div class="weight-600 font-30 text-blue" id="user-name"></div>
+							</h4>
+							
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-50-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<span class="material-icons-outlined" style="font-size: 40px;">group</span>
+								</div>
+								<div class="widget-data">
+									<div class="h4 mb-0">All Users</div>
+									<div class="weight-600 font-14" id="allUsers">Contact</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-50-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<span class="material-icons-outlined" style="font-size: 40px;">assignment_ind</span>
+
+								</div>
+								<div class="widget-data">
+									<div class="h4 mb-0">Cashier</div>
+									<div class="weight-600 font-14" id="currentCashier"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-50-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center"
+							data-toggle="modal"
+									data-target="#bd-example-modal-lg"
+									type="button"
+							>
+
+							
+									<div class="progress-data">
+										<span class="material-icons-outlined" style="font-size: 40px;">table_bar</span>
+								</div>
+								<div class="widget-data">
+									<div class="h4 mb-0">All tables</div>
+									<div class="weight-600 font-14" id="activeTables"></div>
+								</div>
+								</a>
+								<div
+									class="modal fade bs-example-modal-lg"
+									id="bd-example-modal-lg"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-lg modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													All tables
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+											<div class="modal-body" id="tableNames">
+												
+											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 mb-30">
+						<div class="card-box height-50-p widget-style1">
+							<div class="d-flex flex-wrap align-items-center">
+								<div class="progress-data">
+									<span class="material-icons-outlined" style="font-size: 40px;">data_array</span>
+
+								</div>
+								<div class="widget-data">
+									<div class="h4 mb-0">Orders</div>
+									<div class="weight-600 font-14" id="currentOrders"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-12 mb-0">
+						<div class="card-box height-100-p pd-20">
+							<h2 class="h4 mb-20">Top 5 Products</h2>
+							<div id="bar-chart"></div>
+						</div>
+					</div>
+					
+				</div>
+				<br>
+				<div class="pd-ltr-30">
+					<div class="card-box pd-20 height-100-p mb-30">
+						<div class="row align-items-center">
+							<h2 class="h4 mb-20">All Users</h2>
+				<div class="table-responsive">
+					<table class="table table-striped">
+					  <thead>
+						<tr>
+						  <th scope="col">#</th>
+						  <th scope="col">Username</th>
+						  <th scope="col">Role</th>
+						</tr>
+					  </thead>
+					  <tbody id="usersTableBody">
+						<!-- User rows will be added dynamically here -->
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+		   <!-- Material Icons -->
+		   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+		<!-- js -->
+		<script>
+			
+			
+			async function fetchUsers() {
+			  try {
+				const response = await fetch('/api/users');
+				const users = await response.json();
+				const usersTableBody = document.getElementById('usersTableBody');
+		
+				usersTableBody.innerHTML = '';
+		
+				users.forEach((user) => {
+				  const row = document.createElement('tr');
+				 
+				  row.innerHTML = `
+					<th scope="row">${user.id}</th>
+					<td>${user.username}</td>
+					<td>${user.role}</td>
+				  `;
+				  usersTableBody.appendChild(row);
+				});
+			  } catch (error) {
+				console.error('Error fetching users:', error);
+				alert('An error occurred while fetching users.');
+			  }
+			}
+		
+			// Fetch and display users on page load
+			fetchUsers();
+		  </script>
+		<script src="vendors/scripts/core.js"></script>
+		<script src="vendors/scripts/script.min.js"></script>
+		<script src="vendors/scripts/process.js"></script>
+		<script src="vendors/scripts/layout-settings.js"></script>
+		<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="vendors/scripts/dashboard.js"></script>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden"
+			></iframe
+		></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<script>
+			function checkEnteredUser(){
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const username = urlParams.get('username');
+            const role = urlParams.get('role');
+            
+            if(!code || !username || !role){
+              return window.location.href = "/menu.html"
+            }else{
+             
             }
-          } else {
-            // Code is invalid, redirect back to the login page
-            window.open('menu/menu.html', "_blank")
+            
+            
           }
-        } catch (error) {
-          console.error(error);
-          alert('An error occurred while checking the code.');
-          // Redirect back to the login page
-          window.open('menu/menu.html', "_blank")
-        }
+          checkEnteredUser()
+		</script>
+		<script>
+
+			// ---------- CHARTS ----------
+function fetchOrdersData() {
+  return fetch('/get-orders-data')
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Error fetching orders data:', error);
+      return [];
+    });
+}
+
+async function createBarChart() {
+  const ordersData = await fetchOrdersData();
+
+  const barChartOptions = {
+    series: [{
+      data: ordersData.map((entry) => entry.count)
+    }],
+    chart: {
+      type: 'bar',
+      height: 350,
+      toolbar: {
+        show: false
+      },
+    },
+    colors: [
+      "#246dec",
+      "#cc3c43",
+      "#367952",
+      "#f5b74f",
+      "#4f35a1"
+    ],
+    plotOptions: {
+      bar: {
+        distributed: true,
+        borderRadius: 4,
+        horizontal: false,
+        columnWidth: '40%',
+      }
+    },
+    dataLabels: {
+      enabled: true,  // Enable data labels to show the count on bars
+      formatter: function(val) {
+        return val.toFixed(0);  // Format data label to display as integer
+      }
+    },
+    legend: {
+      show: false
+    },
+    xaxis: {
+      categories: ordersData.map((entry) => entry.name)
+    },
+    yaxis: {
+      title: {
+        text: "Count"
       }
     }
-    // Call the checkCode function when the page loads
-    document.addEventListener('DOMContentLoaded', checkCode);
-  
-    function logout() {
-      // Redirect back to the login page
-      window.location.href = '/login.html';
-    }
-</script>
-</body>
-</html>
+  };
 
+  const barChart = new ApexCharts(document.querySelector("#bar-chart"), barChartOptions);
+  barChart.render();
+}
+
+createBarChart();
+			function activeTableNumbers() {
+  fetch('/get-active-tables', {
+    method: 'POST', // Change the method to POST
+  })
+    .then((response) => response.json())
+    .then((orders) => {
+      const i = document.getElementById("activeTables")
+      i.textContent = orders.length
+	  const e = document.getElementById("tableNames")
+	  const ul = document.createElement("ul")
+
+      orders.forEach((order) => {
+        const il = document.createElement("li")
+		il.textContent = order.tableNumberWithoutCode
+		ul.appendChild(il)
+
+      });
+	  e.appendChild(ul)
+    })
+    .catch((error) => {
+      console.error('Error loading orders:', error);
+    });
+}
+
+activeTableNumbers();
+
+function allUsers() {
+  fetch('/get-all-users', {
+    method: 'POST', // Change the method to POST
+  })
+    .then((response) => response.json())
+    .then((orders) => {
+      const i = document.getElementById("allUsers")
+      i.textContent = orders.length
+     
+    })
+    .catch((error) => {
+      console.error('Error loading orders:', error);
+    });
+}
+
+allUsers();
+
+function currentCashier() {
+  return fetch('/api/get-active-shift-username')
+    .then((response) => response.json())
+    .then((data) => {
+        const cashier = data.activeShiftUsername || "None"
+        const i = document.getElementById("currentCashier")
+        i.textContent = cashier;
+    })
+    .catch((error) => {
+      console.error('Error getting active shift username:', error);
+      // Handle the error here, e.g., show an error message to the user
+    });
+}
+
+currentCashier()
+
+function currentOrders(){
+    fetch('/get-orders-numbers')
+    .then((response) => response.json())
+    .then((orders) => {
+      const ordersCount = orders.length;
+      const ordersElement = document.getElementById("currentOrders");
+      ordersElement.textContent = ordersCount;
+    })
+    .catch((error) => {
+      console.error('Error loading orders:', error);
+    });
+}
+
+currentOrders();
+
+	function userName(){
+
+		const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+		const i = document.getElementById("user-name");
+		i.textContent = username
+		const i1 = document.getElementById("user-name1");
+		i1.textContent = username
+	}
+userName()
+
+function kitchen() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `kitchen.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function shift() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `shift.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function qr() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `qr.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function control() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `register.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function menu() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `menu.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function orders() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `orders.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function editusers() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `edit-users.html?code=${code}&role=${role}&username=${username}`;
+}
+
+function dashboard() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `dashboard.html?code=${code}&role=${role}&username=${username}`;
+}
+
+function dineout() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `dineout.html?code=${code}&role=${role}&username=${username}`;
+}
+function change(){
+	const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const username = urlParams.get('username');
+  const role = urlParams.get('role');
+  window.location.href = `changetable.html?code=${code}&role=${role}&username=${username}`;
+}
+
+		</script>
+	</body>
+</html>

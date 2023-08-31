@@ -1,0 +1,553 @@
+<!-- public/menu.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+
+.textInput{
+  padding: 10px;
+  
+  
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+
+}
+
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    /* Navigation Menu Styles */
+    nav {
+      background-color: #333;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      margin: 0 15px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    #menuList {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .menu-item {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-item img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 10px;
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .menu-item p {
+      margin: 10px 0;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .menu-button {
+      background-color: #fff;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      margin: 8px;
+    }
+
+    .menu-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: #333;
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .menu-button:hover {
+      background-color: #333;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .menu-button:hover::before {
+      left: 0;
+    }
+
+    @media screen and (max-width: 600px) {
+      #menuList {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .menu-section {
+      padding: 20px;
+    }
+    .menu-category {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Our Menu</h1>
+  </header>
+  <div id="popupContainer" class="popup-container">
+    <div class="popup">
+      <p>Do you want to edit the menu?</p>
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
+  <!-- Navigation Menu -->
+  <nav>
+    <ul class="category-list" id="categoryList"></ul>
+  </nav>
+
+  <!-- Add containers for each custom category -->
+  <section class="menu-section" id="customCategoriesSection">
+    <!-- Custom category items will be loaded dynamically here -->
+  </section>
+
+  <ul id="menuList" class="menu-container">
+    <!-- Menu items will be loaded dynamically here -->
+  </ul>
+
+  <script>
+const popupContainer = document.getElementById('popupContainer');
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+
+
+
+function showPopup() {
+  popupContainer.style.display = 'flex';
+}
+
+yesBtn.addEventListener('click', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+  window.location.href = `edit-menu.html?code=${code}&username=${username}&role=${role}`; // Redirect to another file
+});
+
+noBtn.addEventListener('click', () => {
+  closePopup();
+});
+
+function closePopup() {
+  popupContainer.style.display = 'none';
+}
+function e(){
+    const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+    
+    if(role =="menu editor" || role =="admin"){
+      showPopup()
+    }
+}
+e()
+
+    async function checkTableNumber(tableNumber) {
+      // Call the server-side API to get all table numbers from the QR codes database
+      const response = await fetch('/api/get-table-numbers');
+      const data = await response.json();
+      const tableNumbers = data.tableNumbers;
+   
+      return tableNumbers.includes(tableNumber);
+    }
+
+    async function checkEnteredUser() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('table') || urlParams.get("Table")
+
+    
+      const isTableNumberValid = await checkTableNumber(code);
+     
+
+      if (isTableNumberValid) {
+        
+      } else if (isTableNumberValid == false && code!==null){
+        
+        window.location.href = "/menu.html";
+      }
+    }
+    checkEnteredUser()
+  </script>
+  <script>
+    // public/js/script.js
+document.addEventListener('DOMContentLoaded', () => {
+  function getActiveShiftUsername() {
+    return fetch('/api/shift')
+      .then((response) => response.json())
+      .then((activeShifts) => {
+       
+        if (activeShifts.length === 0) {
+           ('No active shifts found.');
+          return null;
+        }
+
+        // For simplicity, we'll assume only one active shift exists (you can modify this as needed)
+        const activeShiftUsername = activeShifts[0];
+       
+        return activeShiftUsername;
+      })
+      .catch((error) => {
+        console.error('Error getting active shift username:', error);
+        alert('An error occurred while getting active shift username.');
+        return null;
+      });
+  }
+
+function loadCustomCategories() {
+  fetch('/api/categories')
+    .then((response) => response.json())
+    .then((categories) => {
+      categoryList.innerHTML = '';
+      categories.forEach((category) => {
+        const li = document.createElement('button');
+        li.className= "menu-button";
+        li.textContent = category.name;
+        categoryList.appendChild(li);
+        li.addEventListener('click', () => showCategory(category.name));
+      });
+      if (categories.length > 0) {
+        showCategory(categories[0].name); // Show the first custom category by default
+      }
+    })
+    .catch((error) => {
+      console.error('Error loading custom categories:', error);
+    });
+}
+
+const menuList = document.getElementById('menuList');
+const categoryList = document.querySelector('.category-list');
+
+function showCategory(category) {
+  const menuItems = document.querySelectorAll('.menu-item');
+  menuItems.forEach((item) => {
+    if (category === 'all' || item.classList.contains(category)) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+
+
+function loadCategories(currency) {
+  fetch('/api/categories')
+    .then((response) => response.json())
+    .then((categories) => {
+      categoryList.innerHTML = '';
+      categories.forEach((category) => {
+        const button = document.createElement('button');
+        button.textContent = category.name;
+        button.className = "menu-button";
+        categoryList.appendChild(button);
+        button.addEventListener('click', () => loadCategoryItems(category.name, currency));
+      });
+    })
+    .catch((error) => {
+      console.error('Error loading categories:', error);
+    });
+}
+
+function loadCategoryItems(category, currency) {
+ 
+  fetch('/api/menu')
+    .then((response) => response.json())
+    .then((data) => {
+      menuList.innerHTML = '';
+      data.forEach((item) => {
+        if (item.category === category) {
+          const listItem = document.createElement('li');
+          listItem.classList.add('menu-item');
+          listItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <p>${item.name}</p>
+            <p>Price: ${item.price}${currency}</p>
+            <p>Estimated time: ${item.time}</p>
+          `;
+          let i =item.out_of_stock;
+          let inStock = Boolean;
+          if( i== 2) inStock = true
+          else inStock = false;
+          if(inStock == true){
+          menuList.appendChild(listItem);
+          }
+
+          // Add the order button for each menu item
+          const orderButton = document.createElement('button');
+          orderButton.className = 'menu-button';
+          orderButton.textContent = 'Order';
+          const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('table');
+        const code1 = urlParams.get("Table")
+        
+
+        const inputBox = document.createElement("input")
+        const div = document.createElement("div")
+        div.className = 'textInputWrapper'
+        inputBox.className = 'textInput'
+        inputBox.placeholder = 'Quantity (1)'
+        inputBox.type = "number"
+        inputBox.maxLength = 21
+        const notes = document.createElement("input")
+        notes.placeholder = "Notes (Ex. no onions)"
+        notes.type = "text"
+        notes.className = "textInput"
+        const person = document.createElement("input");
+        person.placeholder = "Name (optional)"
+        person.type = "text"
+        person.className = "textInput"
+        const br = document.createElement("br")
+        const br1 = document.createElement("br")
+        const br2 = document.createElement("br")
+
+        div.appendChild(inputBox)
+        if(code || code1){
+        
+          listItem.appendChild(br2)
+          listItem.appendChild(notes)
+          listItem.appendChild(br1)
+          listItem.appendChild(person)
+          listItem.append(br)
+          listItem.appendChild(div)
+          
+          
+          listItem.appendChild(orderButton);
+          
+        }
+          // Handle order button click
+          orderButton.addEventListener('click', () => {
+            let numbers = Number(inputBox.value) || 1
+            if(numbers>=21){
+              return alert("You cannot order more than 21 items at a time")
+            }
+            let s;
+            if(numbers == 1) s=""
+            else s = "s"
+            const confirmed = window.confirm(`Are you sure you want to order ${numbers} ${item.name}${s}?`)
+            if(confirmed){
+              const note = notes.value || "None"
+              const name = person.value || "Main"
+            for(let i=0; i<numbers; i++){
+             
+            submitOrder(item.name, item.price, item.category);
+            submitTempOrder(item.name, item.price, item.category, note, name)
+            }
+            alert(`Successfully ordered ${numbers} ${item.name}`)
+          }else{
+            alert("Cancelled order")
+          }
+          });
+        }
+      });
+    })
+    .catch((error) => {
+      console.error('Error loading category items:', error);
+    });
+}
+
+async function submitOrder(name, price, category) {
+  const cashier1= await getActiveShiftUsername() || "Cashier"
+
+  const orderData = {
+    name: name,
+    price: parseFloat(price), // Convert the 'price' value to a float
+    category: category,
+    cashier: cashier1,
+    mode: "Dine In"
+  };
+  
+
+  fetch('/submit-order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(orderData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+    })
+    .catch((error) => {
+      console.error('Error submitting order:', error);
+      alert('Error submitting order. Please try again later.');
+    });
+}
+
+async function submitTempOrder(name, price, category, note, name1) {
+      // Get the table number from the URL parameter 'tablenum'
+      const urlParams = new URLSearchParams(window.location.search);
+      const tableNumber = urlParams.get('Table') || urlParams.get("table")
+    
+    const cashier = await getActiveShiftUsername() || "Cashier"
+      const orderData = {
+        name: name,
+        price: parseFloat(price),
+        category: category,
+        tableNumber: tableNumber, // Add the table number to the order data
+        cashierName: cashier,
+        username:  cashier,
+        note: note,
+        person: name1,
+        phone: "None"
+     
+      };
+
+      fetch('/api/submit-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+        
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+         
+        })
+        .catch((error) => {
+          console.error('Error submitting order:', error);
+          alert('Error submitting order. Please try again later.');
+        });
+  }
+
+  async function getCurrency() {
+  try {
+    const response = await fetch('/api/env');
+    const data = await response.json();
+  
+    return data.currency;
+  } catch (error) {
+    console.error('Error fetching environment variables:', error);
+    return null;
+  }
+}
+
+
+  async function loadCategoryItems1(category) {
+  const currency = await getCurrency()
+
+loadCategories(currency);
+}
+loadCustomCategories();
+loadCategoryItems1()
+loadCategoryItems('all'); // Load all items initially
+});
+
+
+
+  </script>
+</body>
+</html>

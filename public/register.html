@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Basic Page Info -->
+		<meta charset="utf-8" />
+		<title>Cashier</title>
+
+		
+
+		<!-- Mobile Specific Metas -->
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="vendors/styles/icon-font.min.css"
+		/>
+		<style>
+			#hyperlink:hover{
+				cursor: pointer;
+			}
+		</style>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+		></script>
+		<script
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-GBZ3SGGX85");
+		</script>
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+		</script>
+		<!-- End Google Tag Manager -->
+	</head>
+	<body>
+		
+
+		<div class="header">
+			<div class="header-left">
+				<div class="menu-icon bi bi-list"></div>
+				<div
+					class="search-toggle-icon bi bi-search"
+					data-toggle="header_search"
+				></div>
+				<div class="header-search">
+					<!--Nothing here-->
+				</div>
+			</div>
+			<div class="header-right">
+				<div class="dashboard-setting user-notification">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle no-arrow"
+							href="javascript:;"
+							data-toggle="right-sidebar"
+						>
+							<i class="dw dw-settings2"></i>
+						</a>
+					</div>
+				</div>
+				
+		
+				<div class="user-info-dropdown">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						>
+							<span class="user-icon">
+								<img src="src/images/person-circle-outline.svg" alt="" />
+							</span>
+							<span class="user-name" id="user-name1"></span>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+						>
+							
+						
+							<a class="dropdown-item" href="login.html"
+								><i class="dw dw-logout"></i> Log Out</a
+							>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="right-sidebar">
+			<div class="sidebar-title">
+				<h3 class="weight-600 font-16 text-blue">
+					Layout Settings
+					<span class="btn-block font-weight-400 font-12"
+						>User Interface Settings</span
+					>
+				</h3>
+				<div class="close-sidebar" data-toggle="right-sidebar-close">
+					<i class="icon-copy ion-close-round"></i>
+				</div>
+			</div>
+			<div class="right-sidebar-body customscroll">
+				<div class="right-sidebar-body-content">
+					<h4 class="weight-600 font-18 pb-10">Header Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-white active"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-dark"
+							>Dark</a
+						>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-light"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-dark active"
+							>Dark</a
+						>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+					<div class="sidebar-radio-group pb-10 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-1"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebaricon-1"
+								><i class="fa fa-angle-down"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-2"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-2"
+							/>
+							<label class="custom-control-label" for="sidebaricon-2"
+								><i class="ion-plus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-3"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-3"
+							/>
+							<label class="custom-control-label" for="sidebaricon-3"
+								><i class="fa fa-angle-double-right"></i
+							></label>
+						</div>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+					<div class="sidebar-radio-group pb-30 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-1"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-1"
+								><i class="ion-minus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-2"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-2"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-2"
+								><i class="fa fa-circle-o" aria-hidden="true"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-3"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-3"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-3"
+								><i class="dw dw-check"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-4"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-4"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-4"
+								><i class="icon-copy dw dw-next-2"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-5"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-5"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-5"
+								><i class="dw dw-fast-forward-1"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-6"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-6"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-6"
+								><i class="dw dw-next"></i
+							></label>
+						</div>
+					</div>
+
+					<div class="reset-options pt-30 text-center">
+						<button class="btn btn-danger" id="reset-settings">
+							Reset Settings
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="left-side-bar">
+			<div class="brand-logo">
+				
+				<div class="close-sidebar" data-toggle="left-sidebar-close">
+					<i class="ion-close-round"></i>
+				</div>
+			</div>
+			<div class="menu-block customscroll">
+				<div class="sidebar-menu">
+					<ul id="accordion-menu">
+						<li>
+							<div class="sidebar-small-cap">Main</div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">Home</span>
+							</a>
+							<ul class="submenu">
+								<li><a  onclick="dashboard()">Dashboard</a></li>
+							</ul>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Ordering </div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-cash"></span
+								><span class="mtext" >Register</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="control()" class="active">Control Panel</a></li>
+								<li><a onclick="qr()">QR Generation</a></li>
+								<li><a onclick="change()">Change Table</a></li>
+								<li><a onclick="dineout()">Dine out/Delivery</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-cup"></span>
+
+								<span class="mtext">Kitchen</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="kitchen()">Kitchen Orders</a></li>
+								
+							</ul>
+						</li>
+						
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-card-checklist"></span>
+
+								<span class="mtext">Main Menu</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="menu()">Menu</a></li>
+								
+							</ul>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Management </div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-people"></span>
+
+								<span class="mtext">Users</span>
+							</a>
+							
+							<ul class="submenu">
+								<li><a onclick="editusers()">Edit Users</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-person-check"></span>
+
+								<span class="mtext">Shifts</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="shift()">Shift Mangement</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-graph-up"></span>
+
+								<span class="mtext">Finance</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="orders()">All orders</a></li>
+								
+							</ul>
+						</li>
+			
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="mobile-menu-overlay"></div>
+		<h2>Welcome, <span id="loggedInUsername"></span>!</h2>
+    <p id="shiftStatus">Checking shift status...</p>
+  
+		<div id="inactiveDiv">
+			
+    </div>
+		<div class="main-container" id="mainDiv">
+			<div class="pd-ltr-30">
+				<div class="card-box pd-20 height-100-p mb-30">
+					<div class="row align-items-center">
+						<h5>For dineout, please order <a onclick="hyperlink()" style="color: blue;" target="_blank" id="hyperlink">here</a></h5>
+					</div>
+				</div>
+			</div>
+				<div class="pd-ltr-30">
+					<div class="card-box pd-20 height-100-p mb-30">
+						<div class="row align-items-center">
+							<h2 class="h4 mb-20">Orders <br><div id="notification"></div></h2>
+							
+							<div class="table-responsive">
+								<table class="table table-striped">
+								  <thead>
+									<tr>
+									  <th>New?</th>
+									  <th>Order ID</th>
+									  <th>Food Item</th>
+									  <th>Price</th>
+									  <th>Table Number</th>
+									  <th>Category</th>
+									  <th>Cashier Name</th>
+									  <th>Notes</th>
+									  <th>Name (Location)</th>
+									  <th>Phone Number</th>
+									  <th>Status</th>
+									  <th>Action</th>
+									</tr>
+								  </thead>
+								  <tbody id="ordersTableBody">
+									<!-- Orders will be loaded dynamically here -->
+								  </tbody>
+								</table>
+							  </div>
+							  
+                      
+			</div>
+		</div>
+	</div>
+		   <!-- Material Icons -->
+		   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+		<!-- js -->
+
+		<script src="vendors/scripts/core.js"></script>
+		<script src="vendors/scripts/script.min.js"></script>
+		<script src="vendors/scripts/process.js"></script>
+		<script src="vendors/scripts/layout-settings.js"></script>
+		<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="vendors/scripts/dashboard.js"></script>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden"
+			></iframe
+		></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<script>
+			function checkEnteredUser(){
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const username = urlParams.get('username');
+            const role = urlParams.get('role');
+            
+            if(!code || !username || !role){
+              return window.location.href = "/menu.html"
+            }else{
+             
+            }
+            
+            
+          }
+          checkEnteredUser()
+		  function userName(){
+
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+
+const i1 = document.getElementById("user-name1");
+i1.textContent = username
+}
+userName()
+
+function kitchen() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `kitchen.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function shift() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `shift.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function qr() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `qr.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function control() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `register.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function menu() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `menu.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function orders() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `orders.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function editusers() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `edit-users.html?code=${code}&role=${role}&username=${username}`;
+}
+
+function dashboard() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `dashboard.html?code=${code}&role=${role}&username=${username}`;
+}
+
+function dineout() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `dineout.html?code=${code}&role=${role}&username=${username}`;
+}
+function change(){
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `changetable.html?code=${code}&role=${role}&username=${username}`;
+}
+
+		</script>
+		<script>
+
+			function hyperlink(){
+				const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const username = urlParams.get('username');
+            const role = urlParams.get('role');
+				window.open(`dineout.html?code=${code}&role=${role}&username=${username}`)
+			}
+			  document.addEventListener('DOMContentLoaded', checkShiftStatus());
+   
+   async function checkShiftStatus() {
+	 try {
+	   const urlParams = new URLSearchParams(window.location.search);
+	   const username = urlParams.get('username');
+		
+	   if (!username) {
+		
+		 return;
+	   }
+
+	   const response = await fetch(`/api/check-shift-status/${username}`);
+	   const { shiftStatus } = await response.json();
+	   
+	   const loggedInUsernameElement = document.getElementById('loggedInUsername');
+	   const shiftStatusElement = document.getElementById('shiftStatus');
+	   const mainDiv = document.getElementById('mainDiv');
+	   const inactiveDiv = document.getElementById('inactiveDiv');
+	   
+	   if (loggedInUsernameElement && shiftStatusElement) {
+		 loggedInUsernameElement.textContent = username || 'User';
+		 shiftStatusElement.textContent = shiftStatus
+		   ? ``
+		   : ``;
+		
+		 // Show/hide mainDiv based on the shift status
+		 if (shiftStatus) {
+		   mainDiv.style.display = 'block';
+		   inactiveDiv.style.display = 'none';
+		 } else {
+		   mainDiv.style.display = 'none';
+		   inactiveDiv.style.display = 'block';
+		 }
+	   }
+	 } catch (error) {
+	   console.error('Error checking shift status:', error);
+	   alert('An error occurred while checking shift status.');
+	 }
+   }
+			  let previousOrderCount = 0;
+			function loadOrders() {
+  fetch('/get-orders')
+    .then((response) => response.json())
+    .then((orders) => {
+      orders = orders.reverse();
+      const tableBody = document.getElementById('ordersTableBody');
+      tableBody.innerHTML = '';
+
+	  orders.forEach((order) => {
+        const row = document.createElement('tr');
+        if (order.id > previousOrderCount) {
+          const newLabel = document.createElement('td');
+          newLabel.textContent = 'New Order';
+          newLabel.classList.add('new-label');
+          row.appendChild(newLabel);
+        } else {
+          row.innerHTML = '<td></td>';
+        }
+		let num;
+		if(order.tableNumber == null) num = "Delivery"
+		else num = order.tableNumber
+        row.innerHTML += `
+          <td>${order.id}</td>
+          <td>${order.name}</td>
+          <td>${order.price}</td>
+          <td>${num}</td>
+          <td>${order.category}</td>
+          <td>${order.cashierName}</td>
+          <td>${order.note}</td>
+          <td>${order.person}</td>
+          <td>${order.phone}</td>
+          <td>${order.status}</td>
+          <td>
+            <button onclick="updateAndSendToKitchen(${order.id}, '${order.name}', ${order.price}, '${order.tableNumber}', '${order.category}', '${order.note}', '${order.status}', '${order.person}', '${order.phone}')">
+              ${order.status === 'Not sent' ? 'Send to Kitchen' : order.status}
+            </button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      // Check if a new order was added
+      if (orders.length > previousOrderCount) {
+        const newOrderCount = orders.length - previousOrderCount;
+        showNotification(`You have ${newOrderCount} new order${newOrderCount > 1 ? 's' : ''}.`);
+      }
+
+      // Update the previousOrderCount for the next refresh
+      previousOrderCount = orders.length;
+    })
+    .catch((error) => {
+      console.error('Error loading orders:', error);
+    
+    });
+}
+loadOrders()
+		
+	function userName(){
+
+		const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+		
+		const i1 = document.getElementById("user-name1");
+		i1.textContent = username
+	}
+userName()
+
+function updateOrderStatus(id, newStatus) {
+  fetch('/api/update-order-status', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    
+    body: JSON.stringify({ id, newStatus }),
+    
+  })
+    .then((response) => {
+      
+      if (!response.ok) {
+        throw new Error('Error updating order status');
+      }
+      // Reload the orders after updating the status
+      loadOrders();
+    })
+    .catch((error) => {
+      console.error('Error updating order status:', error);
+      alert('An error occurred while updating order status.');
+    });
+}
+
+
+function extractNumbersFromString(inputString) {
+  if (typeof inputString !== 'string') {
+    return [];
+  }
+  const regex = /\d+/g;
+  const matchResult = inputString.match(regex);
+  return matchResult ? matchResult.map(Number) : [];
+}
+
+
+
+
+
+function sendToKitchen(id, name, price, tableNumber, category, note, person, phone) {
+  
+  fetch('/api/get-file-placement', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ itemName: name }),
+  })
+    .then((response) => response.json())
+    .then((placementData) => {
+      const { placement } = placementData;
+		
+      // Send the order to the kitchen with the correct placement
+      fetch('/api/send-order-to-kitchen', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          price,
+          tableNumber,
+          category,
+          note,
+          placement,
+		  person, 
+		  phone
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          // Update the order status in the frontend
+          updateOrderStatus(id, 'Sent to kitchen'); // Set the status to "Sent to kitchen"
+          loadOrders(); // Reload the orders
+        })
+        .catch((error) => {
+          console.error('Error sending order to kitchen:', error);
+          alert('Error sending order to kitchen. Please try again later.');
+        });
+    })
+    .catch((error) => {
+      console.error('Error fetching file placement:', error);
+      alert('Error fetching file placement. Please try again later.');
+    });
+}
+function updateAndSendToKitchen(id, name, price, tableNumber, category, note, status, person, phone) {
+  if(status == "Not sent"){
+  updateOrderStatus(id, 'Sent to kitchen'); 
+  }else{
+    alert("You cannot change the status beyond this point!")
+    return
+  }
+  // Fetch the file placement for the selected item
+  fetch('/api/get-file-placement', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ itemName: name }),
+  })
+    .then((response) => response.json())
+    .then((placementData) => {
+      const { placement } = placementData;
+
+      // Send the order to the kitchen with the correct placement
+      fetch('/api/send-order-to-kitchen', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          price,
+          tableNumber,
+          category,
+          note,
+          placement,
+		  person, 
+		  phone
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          const button = document.querySelector(`button[data-order-id="${id}"]`);
+    if (button) {
+      button.textContent = 'Sent to kitchen';
+    }
+          loadOrders();
+        })
+        .catch((error) => {
+          console.error('Error sending order to kitchen:', error);
+          alert('Error sending order to kitchen. Please try again later.');
+        });
+    })
+    .catch((error) => {
+      console.error('Error fetching file placement:', error);
+      alert('Error fetching file placement. Please try again later.');
+    });
+}
+
+function generatePrintContent(name, price, tableNumber, category, note) {
+  // Customize the styles and layout according to your requirements
+  const content = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Kitchen Order</title>
+      <style>
+        /* Add your desired styles for the print layout here */
+        body {
+          font-family: Arial, sans-serif;
+          line-height: 1.6;
+          margin: 20px;
+        }
+        h1 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        p {
+          margin: 5px 0;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Kitchen Order</h1>
+      <p><strong>Item Name:</strong> ${name}</p>
+     
+      <p><strong>Table Number:</strong> ${extractNumbersFromString(tableNumber)}</p>
+      <p><strong>Category:</strong> ${category}</p>
+      <p><strong>Note:</strong>${note}</p>
+    </body>
+    </html>
+  `;
+  return content;
+}
+// Function to display the notification message
+function showNotification(message) {
+  const notificationDiv = document.getElementById('notification');
+  notificationDiv.textContent = message;
+  notificationDiv.style.display = 'block';
+
+  // Hide the notification after 5 seconds (adjust as needed)
+  setTimeout(() => {
+    notificationDiv.textContent = '';
+    notificationDiv.style.display = 'none';
+  }, 5000);
+}
+
+// Function to refresh the control panel by reloading the page
+function refreshControlPanel() {
+  loadOrders(); // Reload the orders
+  setTimeout(refreshControlPanel, 5000); // Refresh every 5 seconds (adjust as needed)
+}
+
+// Call the refreshControlPanel function to start refreshing on page load
+document.addEventListener('DOMContentLoaded', refreshControlPanel);
+		</script>
+	</body>
+</html>

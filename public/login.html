@@ -13,7 +13,7 @@
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background-color: #f7f7f7;
+      background-color: #333;
     }
 
     header {
@@ -29,9 +29,15 @@
     }
 
     main {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
+      height: 350px;
+      width: 300px;
+      position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+     margin: auto;
+     
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -65,19 +71,22 @@
     button:hover {
       background-color: #555;
     }
+    body main form h1{
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Login</h1>
-  </header>
+ 
 
   <main>
     <form onsubmit="login(event)">
+      <h1>Login</h1>
       <label for="username">Username:</label>
       <input type="text" id="username" required>
       <label for="password">Password:</label>
       <input type="password" id="password" required>
+      <br><br>
       <button type="submit">Login</button>
     </form>
   </main>

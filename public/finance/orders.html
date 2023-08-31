@@ -471,10 +471,11 @@ background-color: #FFA474;
                     <th data-sort="category">Category</th>
                     <th data-sort="orderTime">Order Time</th>
                     <th>Cashier</th>
+                    <th>Order Mode</th>
                 </tr>
             </thead>
             <tbody id="tableViewBody">
-                <!-- Data rows will be dynamically added here -->
+                
             </tbody>
         </table>
     <br>
@@ -974,13 +975,17 @@ function updateSummary(orders) {
 
                             const orderCashier = document.createElement("p")
                             orderCashier.textContent = `Cashier: ${order.cashier}`
-
+                           
+                            const orderMode = document.createElement("p")
+                            orderMode.textContent = `Mode: ${order.mode}`
                             orderItem.appendChild(name);
                             orderItem.appendChild(price);
                             orderItem.appendChild(category);
                             orderItem.appendChild(orderTime);
-                            orderItem.appendChild(orderCashier)
+                            orderItem.appendChild(orderCashier);
+                            orderItem.appendChild(orderMode)
                             orderContainer.appendChild(orderItem);
+                            
 
                             // Populate table view
                             const row = document.createElement('tr');
@@ -990,6 +995,7 @@ function updateSummary(orders) {
                                 <td>${order.category}</td>
                                 <td>${fullOrderTime}</td>
                                 <td>${order.cashier}</td>
+                                <td>${order.mode}</td>
                             `;
                             tableViewBody.appendChild(row);
                         });

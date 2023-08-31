@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Basic Page Info -->
+		<meta charset="utf-8" />
+		<title>QR</title>
+
+		
+
+		<!-- Mobile Specific Metas -->
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="vendors/styles/core.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="vendors/styles/icon-font.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+		></script>
+		<script
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-GBZ3SGGX85");
+		</script>
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+		</script>
+		<!-- End Google Tag Manager -->
+	</head>
+	<body>
+		
+
+		<div class="header">
+			<div class="header-left">
+				<div class="menu-icon bi bi-list"></div>
+				<div
+					class="search-toggle-icon bi bi-search"
+					data-toggle="header_search"
+				></div>
+				<div class="header-search">
+					<!--Nothing here-->
+				</div>
+			</div>
+			<div class="header-right">
+				<div class="dashboard-setting user-notification">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle no-arrow"
+							href="javascript:;"
+							data-toggle="right-sidebar"
+						>
+							<i class="dw dw-settings2"></i>
+						</a>
+					</div>
+				</div>
+				
+		
+				<div class="user-info-dropdown">
+					<div class="dropdown">
+						<a
+							class="dropdown-toggle"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+						>
+							<span class="user-icon">
+								<img src="src/images/person-circle-outline.svg" alt="" />
+							</span>
+							<span class="user-name" id="user-name1"></span>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+						>
+							
+						
+							<a class="dropdown-item" href="login.html"
+								><i class="dw dw-logout"></i> Log Out</a
+							>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="right-sidebar">
+			<div class="sidebar-title">
+				<h3 class="weight-600 font-16 text-blue">
+					Layout Settings
+					<span class="btn-block font-weight-400 font-12"
+						>User Interface Settings</span
+					>
+				</h3>
+				<div class="close-sidebar" data-toggle="right-sidebar-close">
+					<i class="icon-copy ion-close-round"></i>
+				</div>
+			</div>
+			<div class="right-sidebar-body customscroll">
+				<div class="right-sidebar-body-content">
+					<h4 class="weight-600 font-18 pb-10">Header Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-white active"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary header-dark"
+							>Dark</a
+						>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+					<div class="sidebar-btn-group pb-30 mb-10">
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-light"
+							>White</a
+						>
+						<a
+							href="javascript:void(0);"
+							class="btn btn-outline-primary sidebar-dark active"
+							>Dark</a
+						>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+					<div class="sidebar-radio-group pb-10 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-1"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebaricon-1"
+								><i class="fa fa-angle-down"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-2"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-2"
+							/>
+							<label class="custom-control-label" for="sidebaricon-2"
+								><i class="ion-plus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebaricon-3"
+								name="menu-dropdown-icon"
+								class="custom-control-input"
+								value="icon-style-3"
+							/>
+							<label class="custom-control-label" for="sidebaricon-3"
+								><i class="fa fa-angle-double-right"></i
+							></label>
+						</div>
+					</div>
+
+					<h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+					<div class="sidebar-radio-group pb-30 mb-10">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-1"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-1"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-1"
+								><i class="ion-minus-round"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-2"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-2"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-2"
+								><i class="fa fa-circle-o" aria-hidden="true"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-3"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-3"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-3"
+								><i class="dw dw-check"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-4"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-4"
+								checked=""
+							/>
+							<label class="custom-control-label" for="sidebariconlist-4"
+								><i class="icon-copy dw dw-next-2"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-5"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-5"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-5"
+								><i class="dw dw-fast-forward-1"></i
+							></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input
+								type="radio"
+								id="sidebariconlist-6"
+								name="menu-list-icon"
+								class="custom-control-input"
+								value="icon-list-style-6"
+							/>
+							<label class="custom-control-label" for="sidebariconlist-6"
+								><i class="dw dw-next"></i
+							></label>
+						</div>
+					</div>
+
+					<div class="reset-options pt-30 text-center">
+						<button class="btn btn-danger" id="reset-settings">
+							Reset Settings
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="left-side-bar">
+			<div class="brand-logo">
+				
+				<div class="close-sidebar" data-toggle="left-sidebar-close">
+					<i class="ion-close-round"></i>
+				</div>
+			</div>
+			<div class="menu-block customscroll">
+				<div class="sidebar-menu">
+					<ul id="accordion-menu">
+						<li>
+							<div class="sidebar-small-cap">Main</div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">Home</span>
+							</a>
+							<ul class="submenu">
+								<li><a  onclick="dashboard()">Dashboard</a></li>
+							</ul>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Ordering </div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-cash"></span
+								><span class="mtext">Register</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="control()">Control Panel</a></li>
+								<li><a onclick="qr()" class="active">QR Generation</a></li>
+								<li><a onclick="change()">Change Table</a></li>
+								<li><a onclick="dineout()">Dine out/Delivery</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-cup"></span>
+
+								<span class="mtext">Kitchen</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="kitchen()">Kitchen Orders</a></li>
+								
+							</ul>
+						</li>
+						
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-card-checklist"></span>
+
+								<span class="mtext">Main Menu</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="menu()">Menu</a></li>
+								
+							</ul>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Management </div>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-people"></span>
+
+								<span class="mtext">Users</span>
+							</a>
+							
+							<ul class="submenu">
+								<li><a onclick="editusers()">Edit Users</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-person-check"></span>
+
+								<span class="mtext">Shifts</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="shift()">Shift Mangement</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class=" micon bi bi-graph-up"></span>
+
+								<span class="mtext">Finance</span>
+							</a>
+							<ul class="submenu">
+								<li><a onclick="orders()">All orders</a></li>
+								
+							</ul>
+						</li>
+			
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="mobile-menu-overlay"></div>
+
+        <div class="main-container" id="mainDiv">
+			<div class="row">
+                <div class="col-lg-4 col-md-6 mb-20">
+                    <div class="card-box height-100-p pd-20 min-height-200px">
+                        <h3>Create New QR Code</h3>
+                        <br>
+                        <div class="d-flex justify-content-between pb-10">
+                            
+                            <br>
+                            <input id="tableNumber" type="number" class="form-control form-control-lg" placeholder="Table Number" required/>
+                            <button class="btn btn-primary" onclick="generateQRCode()">Create</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-20">
+                    
+                    <div class="card-box height-100-p pd-20 min-height-200px">
+                    <h3>Generate New Check</h3>
+                        <br>
+                           
+                        <div class="d-flex justify-content-between pb-10">
+                            
+                            <br>
+                            <input id="tableNumber11" type="number" class="form-control form-control-lg" placeholder="Table Number" required/>
+                            <button class="btn btn-primary" onclick="generateCheck()">Generate</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 mb-20">
+                    <div class="card-box height-100-p pd-20 min-height-200px">
+                        <h3>Delete a table</h3>
+                        <br>
+                        <div class="d-flex justify-content-between pb-10">
+                            
+                            <br>
+                            <input  id="deleteTableNumber" type="number" class="form-control form-control-lg" placeholder="Table Number" required/>
+                            <button class="btn btn-danger" onclick="deleteTable()">Delete</button>
+                        </div>
+                </div>
+            </div>
+
+</div>
+
+
+		   <!-- Material Icons -->
+		   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+		<!-- js -->
+		<script src="vendors/scripts/core.js"></script>
+		<script src="vendors/scripts/script.min.js"></script>
+		<script src="vendors/scripts/process.js"></script>
+		<script src="vendors/scripts/layout-settings.js"></script>
+		<script src="src/plugins/apexcharts/apexcharts.min.js"></script>
+		<script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="vendors/scripts/dashboard.js"></script>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden"
+			></iframe
+		></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<script>
+			 function checkEnteredUser(){
+    const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const username = urlParams.get('username');
+      const role = urlParams.get('role');
+    if(!code || !username || !role){
+      return window.location.href = "/menu.html"
+    }
+    if(role =="cashier" || role =="admin"){
+
+    }else{
+      return window.location.href = "/menu.html"
+    }
+  }
+  checkEnteredUser()
+  function userName(){
+
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+
+const i1 = document.getElementById("user-name1");
+i1.textContent = username
+}
+userName()
+
+function kitchen() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `kitchen.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function shift() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `shift.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function qr() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `qr.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function control() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `register.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function menu() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `menu.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function orders() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `orders.html?code=${code}&role=${encodeURIComponent(role)}&username=${encodeURIComponent(username)}`;
+}
+
+function editusers() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `edit-users.html?code=${code}&role=${role}&username=${username}`;
+}
+
+function dashboard() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `dashboard.html?code=${code}&role=${role}&username=${username}`;
+}
+
+function dineout() {
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `dineout.html?code=${code}&role=${role}&username=${username}`;
+}
+function change(){
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+const username = urlParams.get('username');
+const role = urlParams.get('role');
+window.location.href = `changetable.html?code=${code}&role=${role}&username=${username}`;
+}
+
+		</script>
+         
+  <script>
+    function extractNumbersFromString(inputString) {
+    const regex = /\d+/g;
+    const matches = inputString.match(regex);
+    return matches ? matches.map(Number) : [];
+  }
+  
+  async function checkTableNumber(tableNumber) {
+    const response = await fetch('/api/get-table-numbers');
+    const data = await response.json();
+    const tableNumbers = data.tableNumbers;
+    let array = [];
+  
+    tableNumbers.forEach(i => {
+      array.push(...extractNumbersFromString(i)); // Using spread operator to concatenate the extracted numbers
+    });
+  
+  
+  
+    if (array.includes(Number(tableNumber))) return true;
+    else return false;
+  }
+  
+
+      
+      async function generateQRCode() {
+        
+        const tableNumberInput = document.getElementById('tableNumber');
+        const tableNumber = tableNumberInput.value;
+        if(tableNumber == "") return alert("You must write something")
+        const tableNumberExists = await checkTableNumber(tableNumber)
+        if(tableNumberExists){
+          alert('Table number is already added');
+          return;
+        }
+  
+        // Call the server-side API to generate the QR code
+        fetch('/api/generate-qr', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ tableNumber }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const qrDataURL = data.qrDataURL;
+  
+            // Create an image element for the QR code
+            const qrImage = new Image();
+            qrImage.src = qrDataURL;
+  
+            // Wait for the image to load completely
+            qrImage.onload = () => {
+              // Open a new window
+              const newWindow = window.open('', '_blank');
+  
+              // Generate the content for the new window
+              const content = `
+                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+                <style>
+                  body {
+                    font-family: 'Poppins', sans-serif;
+                  }
+  
+                  #style {
+                    background-color: lightgrey;
+                    border-radius: 10px;
+                    padding: 10px;
+                    margin-left: 28rem;
+                    width: 400px;
+                    margin-top: 10rem;
+                  }
+  
+                  #style img {
+                    margin-left: 7rem;
+                  }
+  
+                  #style h1 {
+                    margin-left: 2.5rem;
+                  }
+                </style>
+                <div id="style">
+                  <br>
+                  <img src="${qrDataURL}">
+                  <h1>Scan the QR Code</h1>
+                </div>
+              `;
+  
+              // Write the content to the new window and close it after printing
+              newWindow.document.write(content);
+              newWindow.window.print();
+              newWindow.document.close();
+            };
+          })
+          .catch((error) => {
+            console.error('Error generating QR code:', error);
+            alert('An error occurred while generating QR code.');
+          });
+      }
+  
+      async function deleteTable() {
+      const deleteTableNumberInput = document.getElementById('deleteTableNumber');
+      const deleteTableNumber = deleteTableNumberInput.value;
+      const tableNumberExists = await checkTableNumber(deleteTableNumber)
+        if(!tableNumberExists){
+          alert('That table number doesnt exist');
+          return;
+        }
+      if(deleteTableNumber == "") return alert("You must write something")
+      // Call the server-side API to delete the table data
+      fetch(`/api/delete-table/${deleteTableNumber}`, {
+        method: 'DELETE',
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.message);
+        })
+        .catch((error) => {
+          console.error('Error deleting table data:', error);
+          alert('An error occurred while deleting the table data.');
+        });
+    }
+    </script>
+  
+  
+  <script>
+     async function getCurrency() {
+    try {
+      const response = await fetch('/api/env');
+      const data = await response.json();
+      return data.currency;
+    } catch (error) {
+      console.error('Error fetching environment variables:', error);
+      return null;
+    }
+  }
+  async function generateCheckContent(orders, currency, restaurantInfo) {
+      const personOrders = {};
+  
+      // Group orders by person
+      orders.forEach((order) => {
+          if (!personOrders[order.person]) {
+              personOrders[order.person] = [];
+          }
+          personOrders[order.person].push(order);
+      });
+  
+      let grandTotal = 0;
+  
+      let checkContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Check for Table ${orders[0].tableNumber}</title>
+            <style>
+              body {
+                font-family: 'Poppins', sans-serif;
+                margin: 20px;
+                background-color: #f5f5f5;
+              }
+              h1, h2 {
+                text-align: center;
+              }
+              h2 {
+                background-color: #e0e0e0;
+                padding: 10px;
+                margin-top: 20px;
+              }
+              table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border: 1px solid #ccc;
+              }
+              th, td {
+                border: 1px solid #000;
+                padding: 8px;
+                text-align: left;
+              }
+              th {
+                background-color: #f2f2f2;
+              }
+              p {
+                margin: 10px 0;
+              }
+              .footer {
+                margin-top: 40px;
+                text-align: center;
+                font-size: 14px;
+              }
+            </style>
+          </head>
+          <body>
+            <h1>Check for Table ${orders[0].tableNumber}</h1>
+      `;
+  
+      for (const person in personOrders) {
+          let subtotal = 0;
+  
+          checkContent += `
+            <h2 style="background-color: #ffc107;">${person}'s Check:</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+          `;
+  
+          personOrders[person].forEach((order) => {
+              checkContent += `
+                  <tr>
+                    <td>${order.name}</td>
+                    <td>${currency}${order.price.toFixed(2)}</td>
+                  </tr>
+              `;
+              subtotal += order.price;
+          });
+  
+          checkContent += `
+              </tbody>
+            </table>
+          `;
+  
+          checkContent += `
+              <p>Subtotal for ${person}: <span style="font-weight: bold; color: #e53935;">${currency}${subtotal.toFixed(2)}</span></p>
+          `;
+  
+          grandTotal += subtotal;
+      }
+  
+      checkContent += `
+            <h2 style="background-color: #4caf50; color: #fff;">Grand Total: ${currency}${grandTotal.toFixed(2)}</h2>
+            
+            <div class="footer">
+              <p>Email: ${restaurantInfo.email}</p>
+              <p>Phone: ${restaurantInfo.phone}</p>
+              <p>Address: ${restaurantInfo.address}</p>
+              <p>Restaurant: ${restaurantInfo.name}</p>
+            </div>
+            
+            <p>Date: ${new Date().toLocaleString()}</p>
+          </body>
+        </html>
+      `;
+  
+      return checkContent;
+  }
+  
+    
+    async function generateCheck() {
+      const currency = await getCurrency();
+        const tableNumber = document.getElementById('tableNumber11').value
+        if(tableNumber == "") return alert("You must write something")
+  
+        console.log('Table number entered:', tableNumber);
+    
+        // Call the server-side API to get the orders for the table number
+        fetch(`/api/get-orders/${tableNumber}`)
+          .then((response) => response.json())
+          .then(async (data) => {
+            console.log('Data received from the server:', data); // New log statement
+            const orders = data.orders;
+            console.log('Orders for the table:', orders); // New log statement
+    
+            if (orders.length === 0) {
+              alert('No orders found for the specified table number.');
+              return;
+            }
+    
+          // Generate the check based on the orders data
+          async function fetchRestaurantInfo() {
+      try {
+          const response = await fetch('/api/restaurant-info');
+          const restaurantInfo = await response.json();
+          return restaurantInfo;
+      } catch (error) {
+          console.error('Error fetching restaurant info:', error);
+          return {};
+      }
+  }
+  
+  // Call the function to fetch restaurant info
+  const restaurantInfo = await fetchRestaurantInfo();
+  
+  // Use the restaurant info in the generateCheckContent function
+  const checkContent = await generateCheckContent(orders, currency, restaurantInfo);
+          // Print the check content
+          const newWindow = window.open('', '_blank');
+          newWindow.document.write(checkContent);
+          newWindow.print()
+         
+        })
+        .catch((error) => {
+          console.log(error);
+          alert('An error occurred while generating the check.');
+        });
+    }
+  
+    async function runthecode(){
+      const currency = await getCurrency();
+      
+      generateCheck(currency)
+    }
+      </script>
+  </body>
+  
+  </html>
+		<script>
+	function userName(){
+
+		const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+	
+		const i1 = document.getElementById("user-name1");
+		i1.textContent = username
+	}
+userName()
+		</script>
+	</body>
+</html>

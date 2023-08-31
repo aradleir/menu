@@ -30,7 +30,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'menu/menu.html'));
+  res.sendFile(path.join(__dirname, 'public'));
 });
 
 function generateRandomCode(length) {
@@ -62,7 +62,7 @@ app.post('/api/generate-qr', (req, res) => {
 
     // Generate the QR code data with the table number
     const uri = process.env.websiteURI;
-    const qrData = `${uri}/menu/menu.html?Table=${tableNumberWithCode}`;
+    const qrData = `${uri}/menu.html?Table=${tableNumberWithCode}`;
 
     // Generate the QR code image as a data URL
     qr.toDataURL(qrData, (err, qrDataURL) => {
@@ -72,8 +72,8 @@ app.post('/api/generate-qr', (req, res) => {
       }
 
       // Save the QR code data and table number to the database
-      const insertSql = 'INSERT INTO qrcodes (qrData, tableNumber) VALUES (?, ?)';
-      qrCodesDb.query(insertSql, [qrDataURL, tableNumberWithCode], (err) => {
+      const insertSql = 'INSERT INTO qrcodes (qrData, tableNumber, tableNumberWithoutCode) VALUES (?, ?, ?)';
+      qrCodesDb.query(insertSql, [qrDataURL, tableNumberWithCode, tableNumber], (err) => {
         if (err) {
           console.error('Error saving QR code data:', err.message);
           return res.status(500).json({ error: 'Error saving QR code data' });
@@ -89,14 +89,14 @@ app.post('/api/generate-qr', (req, res) => {
 app.delete('/api/delete-table/:tableNumber', (req, res) => {
   const { tableNumber } = req.params;
 
-  qrCodesDb.query('DELETE FROM qrcodes WHERE tableNumber LIKE ?', [`%${tableNumber}%`], (err) => {
+  qrCodesDb.query('DELETE FROM qrcodes WHERE tableNumberWithoutCode = ?', [tableNumber], (err) => {
     if (err) {
       console.error('Error deleting table data from qrcodes:', err.message);
       return res.status(500).json({ error: 'Error deleting table data from qrcodes' });
     }
 
     const tempOrdersDb = require("./databases/temporders");
-    tempOrdersDb.query('DELETE FROM orders1 WHERE tableNumber LIKE ?', [`%${tableNumber}%`], (err) => {
+    tempOrdersDb.query('DELETE FROM orders1 WHERE tableNumberWithoutCode = ?', [tableNumber], (err) => {
       if (err) {
         console.error('Error deleting table data from temporders:', err.message);
         return res.status(500).json({ error: 'Error deleting table data from temporders' });
@@ -108,7 +108,23 @@ app.delete('/api/delete-table/:tableNumber', (req, res) => {
           return res.status(500).json({ error: 'Error retrieving data from temporders' });
         }
 
-        res.json({ message: `Table data for table number ${tableNumber} deleted successfully` });
+        
+
+        tempOrdersDb.query('DELETE FROM kitchen_orders WHERE tableNumberWithoutCode = ?', [tableNumber], (err) => {
+          if (err) {
+            console.error('Error deleting table data from temporders:', err.message);
+            return res.status(500).json({ error: 'Error deleting table data from temporders' });
+          }
+    
+          tempOrdersDb.query('SELECT * FROM kitchen_orders', (err, rows) => {
+            if (err) {
+              console.error('Error retrieving data from temporders:', err.message);
+              return res.status(500).json({ error: 'Error retrieving data from temporders' });
+            }
+    
+            res.json({ message: `Table data for table number ${tableNumber} deleted successfully` });
+          });
+        });
       });
     });
   });
@@ -236,11 +252,11 @@ app.post('/remove-category', (req, res) => {
 });
 
 app.post('/submit-order', (req, res) => {
-  const { name, price, category, cashier } = req.body;
+  const { name, price, category, cashier, mode } = req.body;
   const orderTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-  const sql = 'INSERT INTO orders (name, price, category, orderTime, cashier) VALUES (?, ?, ?, ?, ?)';
-  const values = [name, parseFloat(price), category, orderTime, cashier];
+  const sql = 'INSERT INTO orders (name, price, category, orderTime, cashier, mode) VALUES (?, ?, ?, ?, ?, ?)';
+  const values = [name, parseFloat(price), category, orderTime, cashier, mode];
 
   ordersDatabase.query(sql, values, (err) => {
     if (err) {
@@ -253,13 +269,14 @@ app.post('/submit-order', (req, res) => {
 });
 
 app.get('/api/orders', (req, res) => {
-  const sql = 'SELECT name, price, category, orderTime, cashier FROM orders';
+  const sql = 'SELECT name, price, category, orderTime, cashier, mode FROM orders';
   ordersDatabase.query(sql, [], (err, rows) => {
     if (err) {
       console.error('Error fetching orders:', err.message);
       res.status(500).json({ error: 'Error fetching orders' });
     } else {
       res.json(rows);
+    
     }
   });
 });
@@ -382,6 +399,16 @@ app.get('/api/cashiers', (req, res) => {
     return res.json(cashiers);
   });
 });
+app.get('/api/restaurant-info', (req, res) => {
+  const restaurantInfo = {
+      email: process.env.RESTAURANT_EMAIL,
+      phone: process.env.RESTAURANT_PHONE,
+      address: process.env.RESTAURANT_ADDRESS,
+      name: process.env.RESTAURANT_NAME
+  };
+
+  res.json(restaurantInfo);
+});
 
 app.post('/api/start-shift', (req, res) => {
   const { username } = req.body;
@@ -403,7 +430,25 @@ app.post('/api/start-shift', (req, res) => {
         return res.status(500).json({ error: 'Error starting shift' });
       }
 
-      res.sendStatus(200);
+      // Automatically create the orders11 table in the menu database
+     
+      shiftDb.query(`
+        CREATE TABLE IF NOT EXISTS orders11 (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name TEXT,
+          price FLOAT,
+          tableNumber BIGINT,  -- Change data type to BIGINT
+          category VARCHAR(255),
+          cashierName VARCHAR(255),
+          note TEXT
+        )
+      `, (tableErr) => {
+        if (tableErr) {
+          console.error('Error creating orders11 table:', tableErr.message);
+        }
+
+        res.sendStatus(200);
+      });
     });
   });
 });
@@ -473,6 +518,22 @@ app.get('/api/check-shift-status/:username', (req, res) => {
   });
 });
 
+app.get('/api/get-active-shift-username', (req, res) => {
+  usersDatabase.query('SELECT username FROM users WHERE shift_status = 1', (err, rows) => {
+    if (err) {
+      console.error('Error fetching active shift username:', err.message);
+      return res.status(500).json({ error: 'Error fetching active shift username' });
+    }
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'No active shift found' });
+    }
+
+    const activeShiftUsername = rows[0].username;
+    return res.json({ activeShiftUsername });
+  });
+});
+
 app.get('/api/get-orders/:tableNumber', (req, res) => {
   const { tableNumber } = req.params;
 
@@ -512,7 +573,7 @@ app.get('/api/env', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'menu/menu.html'));
+  res.sendFile(path.join(__dirname, 'public', 'menu.html'));
 });
 
 
@@ -531,21 +592,28 @@ app.get('/api/get-table-numbers', (req, res) => {
   });
 });
 
-app.post('/api/submit-order', (req, res) => {
-  const { name, price, category, tableNumber, username, cashierName, note } = req.body;
 
-  // Double-check the tableNumber data
-  const parsedTableNumber = parseInt(tableNumber);
-  if (isNaN(parsedTableNumber)) {
+// Change table
+
+app.post('/api/submit-order', (req, res) => {
+  const { name, price, category, tableNumber, username, cashierName, note, person, phone } = req.body;
+
+ 
+  let parsedTableNumber = parseInt(tableNumber);
+  if(tableNumber == "Not dine in") {
+    parsedTableNumber = null
+  }
+  if (isNaN(parsedTableNumber) && parsedTableNumber !== null) {
     return res.status(400).json({ error: 'Invalid tableNumber format' });
   }
 
+
   const sql = `
-    INSERT INTO orders1 (name, price, category, tableNumber, status, cashierName, note)
-    VALUES (?, ?, ?, ?, "Not sent", ?, ?)
+    INSERT INTO orders1 (name, price, category, tableNumber, status, cashierName, note, person, phone)
+    VALUES (?, ?, ?, ?, "Not sent", ?, ?, ?, ?)
   `;
 
-  tempOrdersDb.execute(sql, [name, price, category, parsedTableNumber, cashierName, note], (err, results) => {
+  tempOrdersDb.execute(sql, [name, price, category, parsedTableNumber, cashierName, note, person, phone], (err, results) => {
     if (err) {
       console.error('Error inserting order into the database:', err.message);
       return res.status(500).json({ error: 'Error inserting order into the database' });
@@ -579,6 +647,7 @@ app.get('/get-orders', (req, res) => {
     }
 
     res.json(results);
+    
     
    
   });
@@ -660,15 +729,15 @@ app.post('/api/get-file-placement', (req, res) => {
 });
 
 app.post('/api/send-order-to-kitchen', (req, res) => {
-  const { name, price, tableNumber, category, note, placement } = req.body;
+  const { id, name, price, tableNumber, category, note, placement, person, phone } = req.body;
 
   // Insert a new order into the database
   const insertQuery = `
-    INSERT INTO kitchen_orders (name, price, tableNumber, placement, category, note, status)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO kitchen_orders (id, name, price, tableNumber, placement, category, note, status, tableNumberWithoutCode, person, phone)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  const values = [name, price, tableNumber, placement, category, note, 'Sent to kitchen'];
+  const values = [id, name, price, tableNumber, placement, category, note, 'Sent to kitchen', tableNumber, person, phone];
 
   tempOrdersDb.query(insertQuery, values, (err, results) => {
     if (err) {
@@ -728,7 +797,154 @@ app.post('/api/update-order-status', (req, res) => {
   });
   res.json({ message: 'Order status updated successfully' });
 });
+app.post("/get-active-tables", (req, res) => {
+  const sql = 'SELECT * FROM qrcodes';
 
+  qrCodesDb.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching orders:', err.message);
+      return res.status(500).json({ error: 'Error fetching orders' });
+    }
+
+    res.json(results);
+    
+   
+  });
+})
+app.get('/api/check-table/:oldTableNumber', (req, res) => {
+  const { oldTableNumber } = req.params;
+
+  qrCodesDb.query('SELECT COUNT(*) as count FROM qrcodes WHERE tableNumber = ?', [oldTableNumber], (err, rows) => {
+    if (err) {
+      console.error('Error checking table:', err.message);
+      return res.status(500).json({ error: 'Error checking table' });
+    }
+
+    const exists = rows[0].count > 0;
+    res.json({ exists });
+  });
+});
+
+app.post('/api/change-table', (req, res) => {
+  const { oldTableNumber, newTableNumber } = req.body;
+
+  // Step 1: Fetch orders from the old table number
+  const selectSql = 'SELECT * FROM orders1 WHERE tableNumber = ?';
+  tempOrdersDb.query(selectSql, [oldTableNumber], (fetchErr, orders) => {
+    if (fetchErr) {
+      console.error('Error fetching orders:', fetchErr.message);
+      return res.status(500).json({ error: 'Error fetching orders' });
+    }
+    const selectSql1 = 'SELECT * FROM kitchen_orders WHERE tableNumber = ?';
+    tempOrdersDb.query(selectSql1, [oldTableNumber], (fetchErr1, orders) => {
+      if (fetchErr) {
+        console.error('Error fetching orders:', fetchErr1.message);
+        return res.status(500).json({ error: 'Error fetching orders' });
+      }
+
+    // Step 2: Update and insert orders with the new table number
+    const updatePromises = orders.map(order => {
+      return new Promise((resolve, reject) => {
+        const newOrder = { ...order, tableNumber: newTableNumber };
+        const insertSql = 'INSERT INTO orders1 (name, price, category, tableNumber, status, cashierName, note, person, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        tempOrdersDb.query(insertSql, [newOrder.name, newOrder.price, newOrder.category, newOrder.tableNumber, newOrder.status, newOrder.cashierName, newOrder.note, newOrder.person, newOrder.phone], (insertErr) => {
+          if (insertErr) {
+            console.error('Error inserting order:', insertErr.message);
+            reject(insertErr);
+          } else {
+            resolve();
+          }
+
+        const insertSql1 = 'INSERT INTO kitchen_orders (name, price, category, tableNumber, status, cashierName, note) VALUES (?, ?, ?, ?, ?, ?, ?)';
+
+          tempOrdersDb.query(insertSql1, [newOrder.name, newOrder.price, newOrder.category, newOrder.tableNumber, newOrder.status, newOrder.cashierName, newOrder.note], (insertErr1) => {
+            if (insertErr1) {
+              console.error('Error inserting order:', insertErr1.message);
+              reject(insertErr1);
+            } else {
+              resolve();
+            }
+          })
+        });
+      });
+    });
+
+    // Step 3: Delete orders from the old table number
+    const deleteOrdersSql = 'DELETE FROM orders1 WHERE tableNumber = ?';
+    tempOrdersDb.query(deleteOrdersSql, [oldTableNumber], (deleteErr) => {
+      if (deleteErr) {
+        console.error('Error deleting orders:', deleteErr.message);
+        return res.status(500).json({ error: 'Error deleting orders' });
+      }
+      const deleteOrdersSql1 = 'DELETE FROM kitchen_orders WHERE tableNumber = ?';
+      tempOrdersDb.query(deleteOrdersSql1, [oldTableNumber], (deleteErr) => {
+        if (deleteErr) {
+          console.error('Error deleting orders:', deleteErr.message);
+          return res.status(500).json({ error: 'Error deleting orders' });
+        }
+      // Step 4: Delete old table number from qrcodes
+      const deleteQrCodeSql = 'DELETE FROM qrcodes WHERE tableNumberWithoutCode = ?';
+      qrCodesDb.query(deleteQrCodeSql, [oldTableNumber], (deleteQrCodeErr) => {
+        if (deleteQrCodeErr) {
+          console.error('Error deleting old table number from qrcodes:', deleteQrCodeErr.message);
+          return res.status(500).json({ error: 'Error deleting old table number from qrcodes' });
+        }
+
+        // Wait for all update promises to resolve
+        Promise.all(updatePromises)
+          .then(() => {
+            res.json({ success: true, message: `Table entry for table number ${oldTableNumber} transferred to ${newTableNumber} successfully` });
+          })
+          .catch(() => {
+            res.json({ success: false, message: 'Failed to transfer table entry' });
+          });
+      });
+    });
+    });
+  })
+  });
+});
+
+
+
+app.get("/get-orders-numbers", (req, res) => {
+  const sql = 'SELECT * FROM orders1';
+
+  tempOrdersDb.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching orders:', err.message);
+      return res.status(500).json({ error: 'Error fetching orders' });
+    }
+
+    res.json(results);
+  });
+});
+app.get('/get-orders-data', (req, res) => {
+  const sql = 'SELECT name, COUNT(*) as count FROM orders GROUP BY name ORDER BY count DESC LIMIT 5';
+
+  ordersDatabase.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching orders data:', err.message);
+      return res.status(500).json({ error: 'Error fetching orders data' });
+    }
+
+    res.json(results);
+  });
+});
+app.post("/get-all-users", (req, res) => {
+  const sql = 'SELECT * FROM users';
+
+  usersDatabase.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching orders:', err.message);
+      return res.status(500).json({ error: 'Error fetching orders' });
+    }
+
+    res.json(results);
+    
+   
+  });
+})
 app.post('/api/delete-order', (req, res) => {
   const { id } = req.body;
 

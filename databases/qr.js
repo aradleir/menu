@@ -21,7 +21,8 @@ qrCodesDb.connect((err) => {
      CREATE TABLE IF NOT EXISTS qrcodes (
        id INT AUTO_INCREMENT PRIMARY KEY,
        qrData TEXT,
-       tableNumber VARCHAR(255) -- Use an appropriate length for your tableNumber
+       tableNumber VARCHAR(255),
+       tableNumberWithoutCode VARCHAR(255)
      )
    `, (err) => {
      if (err) {

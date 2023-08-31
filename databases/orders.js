@@ -28,7 +28,8 @@ function createOrdersTable() {
       price FLOAT,
       category VARCHAR(255),
       orderTime DATETIME,
-      cashier VARCHAR(255)
+      cashier VARCHAR(255),
+      mode VARCHAR(255)
     )
   `, (createErr) => {
     if (createErr) {

@@ -20,11 +20,14 @@ db.connect((err) => {
         id INT AUTO_INCREMENT PRIMARY KEY,
         name TEXT,
         price FLOAT,
-        tableNumber BIGINT,
+        tableNumber VARCHAR(255),
         category VARCHAR(255),
         status VARCHAR(255) DEFAULT 'Not sent',
         cashierName VARCHAR(255),
-        note TEXT
+        note TEXT,
+        person VARCHAR(255),
+        phone VARCHAR(255),
+        tableNumberWithoutCode VARCHAR(255)
       )
     `, (err) => {
       if (err) {
@@ -35,15 +38,18 @@ db.connect((err) => {
     // Create the kitchen_orders table if it doesn't exist
     db.query(`
       CREATE TABLE IF NOT EXISTS kitchen_orders (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id FLOAT,
         name TEXT,
         price FLOAT,
-        tableNumber BIGINT,
+        tableNumber VARCHAR(255),
         category VARCHAR(255),
         status VARCHAR(255) DEFAULT 'Not sent',
         cashierName VARCHAR(255),
         note TEXT,
-        placement VARCHAR(255)
+        placement VARCHAR(255),
+        tableNumberWithoutCode VARCHAR(255),
+        person VARCHAR(255),
+        phone VARCHAR(255)
       )
     `, (err) => {
       if (err) {
